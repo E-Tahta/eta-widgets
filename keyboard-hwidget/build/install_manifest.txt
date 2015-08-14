@@ -1,0 +1,4 @@
+/usr/lib/kde4/plasma_applet_keyboardclient.so
+/usr/share/kde4/services/plasma-keyboardclient-default.desktop
+/usr/share/kde4/apps/plasma/packages/org.kde.keyboardclient/contents/ui/main.qml
+/usr/share/kde4/apps/plasma/packages/org.kde.keyboardclient/metadata.desktop

@@ -1,0 +1,3 @@
+/home/yunusem/projects/keyboardclient/build/CMakeFiles/plasma_applet_keyboardclient.dir
+/home/yunusem/projects/keyboardclient/build/CMakeFiles/plasma_applet_keyboardclient_automoc.dir
+/home/yunusem/projects/keyboardclient/build/CMakeFiles/uninstall.dir

@@ -1,0 +1,20 @@
+[Desktop Entry]
+Name=Keyboardclient
+Comment=It basically triggers up eta-Keyboard
+Icon=preferences-keyboard
+Type=Service
+X-KDE-ServiceTypes=Plasma/Applet
+
+X-KDE-Library=plasma_applet_keyboardclient
+X-KDE-PluginInfo-Author=yunusem
+X-KDE-PluginInfo-Email=yunusemre.senturk@pardus.org.tr
+X-KDE-PluginInfo-Name=keyboardclient
+X-KDE-PluginInfo-Version=1.1
+X-KDE-PluginInfo-Website=
+X-KDE-PluginInfo-Category=Examples
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-Requires-FileDialog=Unused
+X-Plasma-Requires-LaunchApp=Unused
+
