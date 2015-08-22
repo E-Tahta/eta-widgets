@@ -106,6 +106,9 @@ void Keyboardclient::toggle()
 	socket->flush();
       } else {      
 	qDebug() << "failed to connect";
+	
+	delete socket;
+	socket = 0;
       }
     
     }
