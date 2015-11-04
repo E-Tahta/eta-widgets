@@ -31,35 +31,9 @@
      </item>
     </layout>
    </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Panel Renk:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="KColorCombo" name="kcfg_panelColor">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KColorCombo</class>
-   <extends>QComboBox</extends>
-   <header>kcolorcombo.h</header>
-  </customwidget>
   <customwidget>
    <class>KComboBox</class>
    <extends>QComboBox</extends>

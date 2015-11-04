@@ -18,6 +18,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+/*
+ * Modified by Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr> 2015
+ */
+
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
@@ -30,16 +34,11 @@ Item {
     property alias deviceName: deviceLabel.text
     property string emblemIcon
     property int state
-
     property bool mounted
     property bool expanded: (notifierDialog.currentExpanded == index)
     property alias percentUsage: freeSpaceBar.value
-
-
     height: container.childrenRect.height
     width: parent.width
-
-
     MouseArea {
         id: container
         anchors {
@@ -59,7 +58,6 @@ Item {
         }
         onClicked: {
             notifierDialog.itemFocused();
-
             var actions = hpSource.data[udi]["actions"];
             if (actions.length == 1) {
                 service = hpSource.serviceForSource(udi);
@@ -96,9 +94,6 @@ Item {
                 }
             }
         }
-
-
-
         Column {
             id: labelsColumn
             spacing:2
@@ -198,20 +193,14 @@ Item {
 
         Component {
             id: actionItem
-
             ActionItem {
                 icon: modelData["icon"]
                 label: modelData["text"].toUpperCase()
                 predicate: modelData["predicate"]
             }
-
         }
-
     }
-
-
-    function makeCurrent()
-    {
+    function makeCurrent() {
         notifierDialog.currentIndex = index;
         //notifierDialog.highlightItem.opacity = 1;
     }

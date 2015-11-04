@@ -18,18 +18,20 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+/*
+ * Modified by Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr> 2015
+ */
+
 import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 
 Item {
-    id: statusBar
+    id: popUpContainer
     property bool expanded: false
     visible: false
     height: visible ? (expanded ? statusText.paintedHeight+detailsText.paintedHeight+3 : statusText.paintedHeight) : 0
-
     Behavior on height { NumberAnimation { duration: 200 } }
-
     function setData(error, details, udi) {
         shown = visible;
         if (shown)

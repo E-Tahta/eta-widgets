@@ -18,6 +18,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+/*
+ * Modified by Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr> 2015
+ */
+
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
@@ -33,20 +37,18 @@ Rectangle {
     property string expandedDevice
     property string mountPoint
     property string mainUdi : DataEngineSource
-    property Component compactRepresentation: PanelSide {}
+    property Component compactRepresentation: WidgetCompactRepresenter {}
 
     color: "#34353a"
     PlasmaCore.Theme {
         id: theme
     }
-
     PlasmaCore.DataSource {
         id: hpSource
         engine: "hotplug"
         connectedSources: sources
         interval: 0
     }
-
     PlasmaCore.DataSource {
         id: sdSource
         engine: "soliddevice"
@@ -57,23 +59,19 @@ Rectangle {
             last = source;
             processLastDevice(true)
         }
-
         onSourceRemoved: {
             if (expandedDevice == source) {
                 notifierDialog.currentExpanded = -1;
                 expandedDevice = "";
             }
         }
-
         onDataChanged: {
             processLastDevice(true)
         }
-
         onNewData: {
             last = sourceName;
             processLastDevice(false);
         }
-
         function processLastDevice(expand) {
             if (last != "") {
                 if (devicesType == "all" ||
@@ -89,7 +87,6 @@ Rectangle {
             }
         }
     }
-
     function popupEventSlot(popped) {
         if (!popped) {
             // reset the property that lets us remember if an item was clicked
@@ -111,7 +108,7 @@ Rectangle {
         }
         onDataChanged: {
             if (last != "") {
-                statusBar.setData(data[last]["error"], data[last]["errorDetails"], data[last]["udi"]);
+                popUpContainer.setData(data[last]["error"], data[last]["errorDetails"], data[last]["udi"]);
                 plasmoid.status = "NeedsAttentionStatus";
                 plasmoid.showPopup(2500)
             }
@@ -164,12 +161,8 @@ Rectangle {
     MouseArea {
         hoverEnabled: true
         anchors.fill: parent
-
         onEntered: notifierDialog.itemHovered()
         onExited: notifierDialog.itemUnhovered()
-
-
-
         PlasmaExtras.ScrollArea {
             anchors {
                 top : parent.top
@@ -180,7 +173,6 @@ Rectangle {
             }
             ListView {
                 id: notifierDialog
-
                 model: PlasmaCore.SortFilterModel {
                     id: filterModel
                     sourceModel: PlasmaCore.DataModel {
@@ -191,50 +183,36 @@ Rectangle {
                     sortRole: "Timestamp"
                     sortOrder: Qt.DescendingOrder
                 }
-
                 property int currentExpanded: -1
                 property bool itemClicked: true
                 delegate: deviceItem
-
-
                 //this is needed to make SectionScroller actually work
                 //acceptable since one doesn't have a billion of devices
                 cacheBuffer: 1000
-
                 onCountChanged: {
                     if (count == 0) {
-
                         passiveTimer.restart()
-
-
                     } else {
                         passiveTimer.stop()
                         plasmoid.status = "ActiveStatus"                      
                     }
                 }
-
-                function itemHovered()
-                {
+                function itemHovered() {
                     // prevent autohide from catching us!
                     plasmoid.showPopup(0);
                 }
-
-                function itemUnhovered()
-                {
+                function itemUnhovered() {
                     if (!itemClicked) {
                         plasmoid.showPopup(1000);
                     }
                 }
-
-                function itemFocused()
-                {
+                function itemFocused() {
                     if (!itemClicked) {
                         // prevent autohide from catching us!
                         itemClicked = true;
                         plasmoid.showPopup(0)
                     }
                 }
-
                 section {
                     property: "Type Description"
                     delegate: Item {
@@ -259,14 +237,11 @@ Rectangle {
                         }
                     }
                 }
-
                 Component.onCompleted: currentIndex=-1
             }
         }
-
         Component {
             id: deviceItem
-
             DeviceItem {
                 id: wrapper
                 width: notifierDialog.width
@@ -282,13 +257,9 @@ Rectangle {
                     var used = size-freeSpace;
                     return used*100/size;
                 }
-
                 mounted: model["Accessible"]
-
-
                 property bool isLast: (expandedDevice == udi)
                 property int operationResult: (model["Operation result"])
-
                 onIsLastChanged: {
                     if (isLast) {
                         notifierDialog.currentExpanded = index
@@ -312,16 +283,15 @@ Rectangle {
             elementId: "horizontal-line"
             height: lineSvg.elementSize("horizontal-line").height
             anchors {
-                bottom: statusBar.top
-                bottomMargin: statusBar.visible ? 3:0
+                bottom: popUpContainer.top
+                bottomMargin: popUpContainer.visible ? 3:0
                 left: parent.left
                 right: parent.right
             }
-            visible: statusBar.height>0
+            visible: popUpContainer.height>0
         }
-
-        StatusBar {
-            id: statusBar
+        PopUpContainer {
+            id: popUpContainer
             anchors {
                 left: parent.left
                 leftMargin: 5
