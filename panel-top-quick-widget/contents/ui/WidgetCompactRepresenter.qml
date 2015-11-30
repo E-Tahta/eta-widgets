@@ -24,13 +24,47 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.runnermodel 0.1 as RunnerModels
 import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
+
+/**
+ * This qml component specifically prepared for Interactive White Board.
+ *
+ * It shows some specific application launchers for quick use of them
+ * by regarding the current user.
+ */
 Item {
     id: widgetrepresenter
+
+    /**
+     * Indicates that the minimum width of the widget regarding the screen
+     * resolution.
+     */
     property int minimumWidth: screenData.data["Local"]["width"]*14/100;
+
+    /**
+     * Indicates that the minimum height of the widget regarding the sub
+     * modules that are quick application launchers' rectangles determined
+     * by the function checkUser(string user_nickname).
+     */
     property int minimumHeight: checkUser(userDataSource.data["Local"]["loginname"])
+
+    /**
+     * Indicates that the global veriable for general left & right alignment
+     * regarding the screen resolution.
+     */
     property int leftrightAlign: minimumWidth*9/100
+
+    /**
+     * Indicates that the global veriable for general line alignment
+     * regarding the screen resolution.
+     */
     property int lineAlign: minimumWidth*7/100
+
+    /**
+     * Indicates that the global veriable for general text left & right
+     * alignment regarding the screen resolution.
+     */
     property int textAlign: minimumWidth*4/100
+
     Column {
         anchors.fill:parent
         Rectangle {
@@ -238,7 +272,6 @@ Item {
             }//Row
             MouseArea {
                 anchors.fill: parent
-
                 onPressAndHold: { libretext.color= "#FF6C00"; }
                 onPressed: {libretext.color= "#FF6C00"; }
                 onReleased: {plasmoid.runCommand("libreoffice"); libretext.color= "#969699";}
@@ -359,6 +392,14 @@ Item {
             }
         }
     }//main column
+
+    /**
+     * This function determines minimum height of the widget by regarding
+     * current user.
+     *
+     * @param type:string username
+     * @return type:int minimumHeight
+     */
     function checkUser(username) {
         if(username=="ogrenci") {
             usb.visible=false;
@@ -366,6 +407,10 @@ Item {
         }
         return dolphin.height+usb.height+libre.height+firefox.height+eba.height;
     }
+
+    /**
+     * This is the plasma data-engine that provides current user information.
+     */
     PlasmaCore.DataSource {
         id: userDataSource
         engine: "userinfo"
