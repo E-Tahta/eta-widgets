@@ -45,7 +45,7 @@ Item {
      * Indicates that the minimum height of the widget regarding the screen
      * resolution.
      */
-    property int minimumHeight : volumeChanger.height + printscreen.height+bottomseperator.height+closer.height
+    property int minimumHeight : keyboardclient.height+volumeChanger.height + printscreen.height+bottomseperator.height+closer.height
 
     /**
      * Indicates that the global veriable for general left & right alignment
@@ -65,8 +65,17 @@ Item {
      */
     property int textAlign: minimumWidth*4/100
 
-    Column {
+    Column {        
         anchors.fill:parent
+
+        KeyboardClient{
+            id:keyboardclient
+            height: minimumWidth *19/100
+            color:"#ffffff"
+            width: minimumWidth
+            visible: true
+        }
+
         VolumeChanger {
             id:volumeChanger
             volumeline: minimumWidth *44 /100
