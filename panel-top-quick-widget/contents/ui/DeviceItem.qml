@@ -34,9 +34,11 @@ Item {
     property alias deviceName: deviceLabel.text
     property string emblemIcon
     property int state
+    property alias leftActionIcon: leftAction.source
     property bool mounted
     property bool expanded: (notifierDialog.currentExpanded == index)
     property alias percentUsage: freeSpaceBar.value
+    signal leftActionTriggered
     height: container.childrenRect.height
     width: parent.width
     MouseArea {
@@ -164,6 +166,52 @@ Item {
                 return i18np("1 action for this device", "%1 actions for this device", actions.length);
             } else {
                 return actions[0]["text"];
+            }
+        }
+        MouseEventListener {
+            id: leftActionArea
+            width: theme.iconSizes.dialog*0.8
+            height: width
+            hoverEnabled: true
+            anchors {
+                right: parent.right
+                verticalCenter: deviceIcon.verticalCenter
+            }
+
+            onClicked: {
+                notifierDialog.itemFocused();
+                if (leftAction.visible) {
+                    leftActionTriggered()
+                }
+            }
+
+            PlasmaCore.IconItem {
+                id: leftAction
+                anchors.fill: parent
+                active: leftActionArea.containsMouse
+                visible: !busySpinner.visible
+            }
+
+            PlasmaComponents.BusyIndicator {
+                id: busySpinner
+                anchors.fill: parent
+                running: visible
+                visible: deviceItem.state != 0
+            }
+        }
+
+        PlasmaCore.ToolTip {
+            target: leftAction
+            subText: {
+                if (!model["Accessible"]) {
+                    return i18n("Click to mount this device.")
+                } else if (model["Device Types"].indexOf("OpticalDisc") != -1) {
+                    return i18n("Click to eject this disc.")
+                } else if (model["Removable"]) {
+                    return i18n("Click to safely remove this device.")
+                } else {
+                    return i18n("Click to access this device from other applications.")
+                }
             }
         }
 

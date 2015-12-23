@@ -257,9 +257,26 @@ Rectangle {
                     var used = size-freeSpace;
                     return used*100/size;
                 }
+                leftActionIcon: {
+                    if (mounted) {
+                        return QIcon("media-eject");
+                    } else {
+                        return QIcon("emblem-mounted");
+                    }
+                }
+
                 mounted: model["Accessible"]
+
+                onLeftActionTriggered: {
+                    operationName = mounted ? "unmount" : "mount";
+                    service = sdSource.serviceForSource(udi);
+                    operation = service.operationDescription(operationName);
+                    service.startOperationCall(operation);
+                }
+
                 property bool isLast: (expandedDevice == udi)
                 property int operationResult: (model["Operation result"])
+
                 onIsLastChanged: {
                     if (isLast) {
                         notifierDialog.currentExpanded = index
