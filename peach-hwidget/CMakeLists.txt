@@ -25,16 +25,9 @@ target_link_libraries(plasma_applet_peachhybrid
                       ${X11_XTest_LIB} 
                       ${X11_X11_LIB} 
                       ${X11_LIBS} )
-                      
-MACRO(installPackage dir component)
-   SET(root ${ARGN})
-   IF(NOT root)
-      SET(root plasma/plasmoids)
-   ENDIF(NOT root)
-   install(DIRECTORY ${dir}/ DESTINATION ${DATA_INSTALL_DIR}/${root}/${component} PATTERN Messages.sh EXCLUDE PATTERN CMakeLists.txt EXCLUDE)
-   install(FILES ${dir}/metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR} RENAME plasma-applet-${component}.desktop)
-ENDMACRO(installPackage)
 
-install(TARGETS plasma_applet_peachhybrid DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES plasma-peachhybrid-default.desktop DESTINATION ${SERVICES_INSTALL_DIR})
-install(DIRECTORY package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.peachhybrid)
+                      
+
+install(TARGETS plasma_applet_peachhybrid DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/kde4/)
+install(FILES plasma-peachhybrid-default.desktop DESTINATION ${CMAKE_INSTALL_PREFIX}/share/kde4/services/)
+install(DIRECTORY package/ DESTINATION ${CMAKE_INSTALL_PREFIX}/share/kde4/apps/plasma/packages/org.kde.peachhybrid)
