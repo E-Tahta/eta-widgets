@@ -1,3 +1,9 @@
+eta-widgets (0.1.1-1) unstable; urgency=medium
+
+  * [d7aa0b8] Upstream creates upstream ChangeLog
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Thu, 24 Dec 2015 12:15:18 +0200
+
 eta-widgets (0.1.0-2) unstable; urgency=medium
 
   * [6ae759f] Fix lintian warnings
