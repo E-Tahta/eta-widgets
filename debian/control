@@ -1,0 +1,17 @@
+Source: eta-widgets
+Section: utils
+Priority: optional
+Maintainer: yunusem <yunusemre.senturk@pardus.org.tr>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+Homepage: https://pardus.org.tr
+
+
+Package: eta-widgets
+Architecture: amd64
+Depends: ${misc:Depends}, libc6 (>= 2.19-18), plasma-desktop (>= 4:4.11.13-2)
+Description: Etkileşimli Tahta Arayüzü ' ne özel geliştirilmiş Plasmoidler.
+ EtaPanel üzerinde duran ve ETA kullanıcısına çeşitli kullanış kolaylıkları
+ sağlayan qml ve cpp ile geliştirilmiş plasma4 gereçleri.
+
+
