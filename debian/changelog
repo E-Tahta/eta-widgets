@@ -1,3 +1,9 @@
+eta-widgets (0.1.0-2) unstable; urgency=medium
+
+  * [6ae759f] Fix lintian warnings
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Thu, 24 Dec 2015 12:10:05 +0200
+
 eta-widgets (0.1.0-1) unstable; urgency=low
 
   * Initial Release.
