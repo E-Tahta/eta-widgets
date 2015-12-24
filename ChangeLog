@@ -1,0 +1,148 @@
+2015-12-23  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* CMakeLists.txt, panel-bottom-widget/Doxyfile,
+	panel-top-quick-widget/Doxyfile, panel-top-widget/Doxyfile,
+	peach-hwidget/CMakeLists.txt, search-widget/Doxyfile: Create
+	CMakelists.txt for debian packaging
+
+2015-12-23  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* panel-top-quick-widget/contents/ui/DeviceItem.qml,
+	panel-top-quick-widget/contents/ui/main.qml: Fixes #355
+
+2015-12-18  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* panel-bottom-widget/contents/ui/KeyboardClient.qml: Review and add
+	qml part into panel-bottom-widget
+
+2015-12-18  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* keyboard-hwidget/CMakeLists.txt, keyboard-hwidget/Messages.sh,
+	keyboard-hwidget/keyboardclient.cpp,
+	keyboard-hwidget/keyboardclient.h,
+	keyboard-hwidget/package/contents/ui/main.qml,
+	keyboard-hwidget/package/metadata.desktop,
+	keyboard-hwidget/plasma-keyboardclient-default.desktop,
+	panel-bottom-widget/contents/ui/main.qml: Delete keyboardh-widget
+	and combine it into panel-bottom-widget
+
+2015-11-30  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* keyboard-hwidget/.kdev4/keyboardclient.kdev4,
+	panel-top-quick-widget/.directory,
+	panel-top-quick-widget/contents/images/.directory,
+	panel-top-widget/.directory: Remove unnecessary files
+
+2015-11-30  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* keyboard-hwidget/package/contents/ui/main.qml,
+	panel-bottom-widget/Doxyfile, panel-top-quick-widget/Doxyfile,
+	panel-top-quick-widget/contents/ui/WidgetCompactRepresenter.qml,
+	peach-hwidget/package/contents/ui/main.qml, search-widget/Doxyfile,
+	search-widget/contents/ui/SearchEngine.qml,
+	search-widget/contents/ui/SearchPlasmoid.qml,
+	search-widget/contents/ui/main.qml: Review comments on ETA widgets
+
+2015-11-04  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* keyboard-hwidget/package/contents/ui/main.qml,
+	panel-bottom-widget/Doxyfile,
+	panel-bottom-widget/contents/code/apps.js,
+	panel-bottom-widget/contents/code/specificapps.js,
+	panel-bottom-widget/contents/config.ui,
+	panel-bottom-widget/contents/config/main.xml,
+	panel-bottom-widget/contents/ui/Help.qml,
+	panel-bottom-widget/contents/ui/VolumeChanger.qml,
+	panel-bottom-widget/contents/ui/config.ui,
+	panel-bottom-widget/contents/ui/main.qml,
+	panel-top-quick-widget/contents/ui/ActionItem.qml,
+	panel-top-quick-widget/contents/ui/DeviceItem.qml,
+	panel-top-quick-widget/contents/ui/PanelSide.qml,
+	panel-top-quick-widget/contents/ui/PopUpContainer.qml,
+	panel-top-quick-widget/contents/ui/StatusBar.qml,
+	panel-top-quick-widget/contents/ui/WidgetCompactRepresenter.qml,
+	panel-top-quick-widget/contents/ui/main.qml,
+	panel-top-widget/Doxyfile,
+	panel-top-widget/contents/code/specificapps.js,
+	panel-top-widget/contents/ui/ApplicationListView.qml,
+	panel-top-widget/contents/ui/BlackBoard.qml,
+	panel-top-widget/contents/ui/PanelApp.qml,
+	panel-top-widget/contents/ui/PanelSide.qml,
+	panel-top-widget/contents/ui/WidgetCompactRepresenter.qml,
+	panel-top-widget/contents/ui/main.qml,
+	peach-hwidget/package/contents/ui/main.qml,
+	search-widget/contents/ui/SearchEngine.qml,
+	search-widget/contents/ui/SearchPlasmoid.qml,
+	search-widget/contents/ui/main.qml: Prepeare documentation
+
+2015-08-22  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* keyboard-hwidget/build/CMakeCache.txt,
+	keyboard-hwidget/build/CMakeFiles/3.0.2/CMakeCCompiler.cmake,
+	keyboard-hwidget/build/CMakeFiles/3.0.2/CMakeCXXCompiler.cmake,
+	keyboard-hwidget/build/CMakeFiles/3.0.2/CMakeSystem.cmake,
+	keyboard-hwidget/build/CMakeFiles/3.0.2/CompilerIdC/CMakeCCompilerI
+	d.c,
+	keyboard-hwidget/build/CMakeFiles/3.0.2/CompilerIdCXX/CMakeCXXCompi
+	lerId.cpp,
+	keyboard-hwidget/build/CMakeFiles/CMakeDirectoryInformation.cmake,
+	keyboard-hwidget/build/CMakeFiles/CMakeError.log,
+	keyboard-hwidget/build/CMakeFiles/CMakeOutput.log,
+	keyboard-hwidget/build/CMakeFiles/CMakeRuleHashes.txt,
+	keyboard-hwidget/build/CMakeFiles/Makefile.cmake,
+	keyboard-hwidget/build/CMakeFiles/Makefile2,
+	keyboard-hwidget/build/CMakeFiles/TargetDirectories.txt,
+	keyboard-hwidget/build/CMakeFiles/cmake.check_cache,
+	keyboard-hwidget/build/CMakeFiles/plasma_applet_keyboardclient.dir/
+	CXX.includecache,
+	keyboard-hwidget/build/CMakeFiles/plasma_applet_keyboardclient.dir/
+	DependInfo.cmake,
+	keyboard-hwidget/build/CMakeFiles/plasma_applet_keyboardclient.dir/
+	build.make,
+	keyboard-hwidget/build/CMakeFiles/plasma_applet_keyboardclient.dir/
+	cmake_clean.cmake,
+	keyboard-hwidget/build/CMakeFiles/plasma_applet_keyboardclient.dir/
+	depend.internal,
+	keyboard-hwidget/build/CMakeFiles/plasma_applet_keyboardclient.dir/
+	depend.make,
+	keyboard-hwidget/build/CMakeFiles/plasma_applet_keyboardclient.dir/
+	flags.make,
+	keyboard-hwidget/build/CMakeFiles/plasma_applet_keyboardclient.dir/
+	link.txt,
+	keyboard-hwidget/build/CMakeFiles/plasma_applet_keyboardclient.dir/
+	progress.make,
+	keyboard-hwidget/build/CMakeFiles/plasma_applet_keyboardclient_auto
+	moc.dir/DependInfo.cmake,
+	keyboard-hwidget/build/CMakeFiles/plasma_applet_keyboardclient_auto
+	moc.dir/build.make,
+	keyboard-hwidget/build/CMakeFiles/plasma_applet_keyboardclient_auto
+	moc.dir/cmake_clean.cmake,
+	keyboard-hwidget/build/CMakeFiles/plasma_applet_keyboardclient_auto
+	moc.dir/depend.internal,
+	keyboard-hwidget/build/CMakeFiles/plasma_applet_keyboardclient_auto
+	moc.dir/depend.make,
+	keyboard-hwidget/build/CMakeFiles/plasma_applet_keyboardclient_auto
+	moc.dir/progress.make,
+	keyboard-hwidget/build/CMakeFiles/progress.marks,
+	keyboard-hwidget/build/CMakeFiles/uninstall.dir/DependInfo.cmake,
+	keyboard-hwidget/build/CMakeFiles/uninstall.dir/build.make,
+	keyboard-hwidget/build/CMakeFiles/uninstall.dir/cmake_clean.cmake,
+	keyboard-hwidget/build/CMakeFiles/uninstall.dir/progress.make,
+	keyboard-hwidget/build/CMakeTmp/check_qt_application.cpp,
+	keyboard-hwidget/build/CMakeTmp/check_qt_visibility.cpp,
+	keyboard-hwidget/build/CTestTestfile.cmake,
+	keyboard-hwidget/build/Makefile,
+	keyboard-hwidget/build/cmake_install.cmake,
+	keyboard-hwidget/build/cmake_uninstall.cmake,
+	keyboard-hwidget/build/install_manifest.txt,
+	keyboard-hwidget/build/keyboardclient.moc,
+	keyboard-hwidget/build/plasma_applet_keyboardclient_automoc.cpp,
+	keyboard-hwidget/build/plasma_applet_keyboardclient_automoc.cpp.fil
+	es, keyboard-hwidget/keyboardclient.cpp,
+	keyboard-hwidget/keyboardclient.kdev4: Fixed socket deletion after
+	connection-failed
+
+2015-08-14  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* Initial commit
+
