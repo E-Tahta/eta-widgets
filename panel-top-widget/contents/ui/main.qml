@@ -108,10 +108,15 @@ Rectangle {
     function getMenuItems(source) {
         if(!sources) sources = appsSource.data[appSearchQuery]["entries"];
         entry = appsSource.data[sources[i]];
+
         if (sources[i] != "---" && entry && entry["name"]) {
+
             if (Apps.appNames.indexOf(entry["name"]) < 0 && entry["name"] != ".hidden") {
+
                 Apps.appNames.push(entry["name"]);
+
                 if (entry["isApp"] && entry["display"]) {
+
                     var app = {
                         source: sources[i],
                         name: entry["name"],
@@ -120,19 +125,27 @@ Rectangle {
                         iconName: entry["iconName"],
                         entryPath: entry["entryPath"]
                     };
+
                     Apps.allApps.push(app);
+
                     Apps.categories[Apps.categoryName].apps.push(app);
+
                 } else if(entry["entries"] && entry["entries"].length > 0) {
+
                     // check if major category
                     // subcategories don't have name
                     // check number of / in name
+
                     if(entry["name"] && sources[i].split('/').length == 2) {
+
                         Apps.categoryNames.push({
                             source: sources[i],
                             name: entry["name"],
                             genericName: entry["genericName"],
                             iconName: entry["iconName"]
                         });
+
+
                         Apps.categories[entry["name"]] = {
                             source: sources[i],
                             genericName: entry["genericName"],
@@ -141,33 +154,49 @@ Rectangle {
                             menuId: entry["menuId"],
                             apps: []
                         };
+
                     }
+
                     appCategories.append({
                         source: sources[i],
                         name: entry["name"]
                     });
                 }
+
             }
+
         }
+
         if(i < sources.length - 1) {
             i++;
             return true;
         } else {
+
             i = 0;
+
             if(categoryIndex == appCategories.count) {
                 Apps.allApps.sort(sortByName);
+
+
                 categoriesList.model = Apps.categoryNames;
+
                 return false;
             }
+
             appSearchQuery = appCategories.get(categoryIndex).source;
+
             if( appCategories.get(categoryIndex).name && appSearchQuery.split('/').length == 2 ) {
                 Apps.categoryName = appCategories.get(categoryIndex).name;
             }
+
             sources = appsSource.data[appSearchQuery]["entries"];
+
             categoryIndex++;
             return true;
         }
+
     }
+
 
     function sortByName(a, b) {
         var nameA = a.name.toLowerCase(),
@@ -281,18 +310,21 @@ Rectangle {
 
     Component {
         id: appItem
+
         Item {
             width: screenData.data["Local"]["width"]*13/100
-            height: minimumWidth*20/100 * checkApplication(modelData.name.toUpperCase())
-            visible: checkApplication(modelData.name.toUpperCase())
+            height: minimumWidth*20/100
             Plasma.ToolButton {
                 id:tb
                 iconSource: QIcon(modelData.iconName)
+
                 anchors.fill: parent
+
                 onClicked: {
                     var operation = appsSource.serviceForSource(modelData.menuId).operationDescription("launch");
                     appsSource.serviceForSource(modelData.menuId).startOperationCall(operation);
                     pageStack.pop();
+
                 }
             }
 
@@ -304,6 +336,7 @@ Rectangle {
                 verticalAlignment: Text.AlignVCenter
                 font.pointSize: 10
                 color: "#ffffff"
+
                 anchors{
                     left:tb.left
                     leftMargin: minimumWidth*20/100 + 5
