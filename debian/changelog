@@ -1,3 +1,9 @@
+eta-widgets (0.1.2-1) unstable; urgency=medium
+
+  * [389de87] Fix visual menu items BUG
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Mon, 11 Jan 2016 11:34:22 +0200
+
 eta-widgets (0.1.1-1) unstable; urgency=medium
 
   * [d7aa0b8] Upstream creates upstream ChangeLog
