@@ -152,35 +152,88 @@ Rectangle {
         }
     }
 
-    ListView {
-        id: appsMenuList
-        anchors.fill:parent
-        spacing: 5
-        snapMode: ListView.SnapOneItem
-        orientation: ListView.Horizontal
-        highlightMoveSpeed: 400
-        highlightMoveDuration: 150
+    SearchField {
+        id: searchField
+        anchors.top: main.top
+        anchors.left: main.left
+        anchors.right: main.right
+        anchors.margins: 6
+        dataSource: appsSource
+        searchMenu: searchMenu
+
+    }
+
+    Item {
+        id: centralWidget
+        anchors.top: searchField.bottom
+        anchors.left: main.left
+        anchors.right: main.right
+        anchors.bottom: parent.bottom
+        anchors.topMargin: main.defaultMargin
+        anchors.leftMargin: main.defaultMargin
+        anchors.rightMargin: main.defaultMargin
+        anchors.bottomMargin: main.defaultMargin
         clip: true
-        focus: true;
-        model: main.numOfSubMenus + 1 + main.startIndex// this dramatically slows down opening a submenu
-        delegate: Menu {
-            id: appsMenu
-            width: (appsMenuList.width - appsMenuList.spacing) / numOfColumns
-            height: appsMenuList.height
-            model: /*main.favoritesVisible && index == 0 ? favoritesList : */eval("appsMenu" + (index - startIndex) + "List")
-            isEditing:false// !main.favoritesLocked && main.favoritesVisible
+
+        Menu {
+            id: searchMenu
+            width: centralWidget.width
+            height: centralWidget.height
+            x: 0
+            y: searchField.text.length > 0 ? 0 : -centralWidget.height
+            clip: true
+            model: searchField.model
             iconSize: main.iconSize
             smallIconSize: main.smallIconSize
             fontPointSize: main.fontPointSize
-            showDescription: false //main.showDescription
-            onItemSelected: openItem(source, index);
+            showDescription: main.showDescription
+            isSearchMenu: true
+            onItemSelected: openItem(source, 0);
 
-            onGoLeft: main.goLeft();
-            onGoRight: main.goRight(source, index);
+
+            Behavior on y {
+                NumberAnimation { duration: 300; easing.type: Easing.Linear }
+            }
         }
 
-        onMovementEnded: { // make sure currentIndex has the correct value when flicking appsMenuList
-            currentIndex = contentX / contentWidth * count;
+        Item {
+            id: appsMenuListContainer
+            width: centralWidget.width
+            height: centralWidget.height
+            x: 0
+            y: searchField.text.length > 0 ? centralWidget.height : 0
+
+            ListView {
+                id: appsMenuList
+                anchors.fill:parent
+                spacing: 5
+                snapMode: ListView.SnapOneItem
+                orientation: ListView.Horizontal
+                highlightMoveSpeed: 400
+                highlightMoveDuration: 150
+                clip: true
+                focus: true;
+                model: main.numOfSubMenus + 1 + main.startIndex// this dramatically slows down opening a submenu
+                delegate: Menu {
+                    id: appsMenu
+                    width: (appsMenuList.width - appsMenuList.spacing) / numOfColumns
+                    height: appsMenuList.height
+                    model: /*main.favoritesVisible && index == 0 ? favoritesList : */eval("appsMenu" + (index - startIndex) + "List")
+                    isEditing:false// !main.favoritesLocked && main.favoritesVisible
+                    iconSize: main.iconSize
+                    smallIconSize: main.smallIconSize
+                    fontPointSize: main.fontPointSize
+                    showDescription: false //main.showDescription
+                    onItemSelected: openItem(source, index);
+
+                    onGoLeft: main.goLeft();
+                    onGoRight: main.goRight(source, index);
+                }
+
+                onMovementEnded: { // make sure currentIndex has the correct value when flicking appsMenuList
+                    currentIndex = contentX / contentWidth * count;
+                }
+            }
         }
     }
 }
