@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=paneltopwidget
 Comment=Gets user name and surname and shows date and time, and also can open up some specific applications
-Icon=applications-system
+Icon=tum_uygulamalar
 
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/main.qml

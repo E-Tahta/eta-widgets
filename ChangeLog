@@ -1,3 +1,51 @@
+2016-01-25  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* panel-top-widget/contents/ui/ApplicationListView.qml,
+	panel-top-widget/contents/ui/Menu.qml,
+	panel-top-widget/contents/ui/MenuItem.qml,
+	panel-top-widget/contents/ui/RightArrow.qml,
+	panel-top-widget/contents/ui/SearchField.qml,
+	panel-top-widget/contents/ui/Title.qml,
+	panel-top-widget/contents/ui/main.qml,
+	panel-top-widget/metadata.desktop,
+	qmlnewappmenu/contents/ui/Menu.qml,
+	qmlnewappmenu/contents/ui/MenuItem.qml,
+	qmlnewappmenu/contents/ui/RightArrow.qml,
+	qmlnewappmenu/contents/ui/SearchField.qml,
+	qmlnewappmenu/contents/ui/Title.qml,
+	qmlnewappmenu/contents/ui/main.qml, qmlnewappmenu/metadata.desktop: 
+	Refactor panel-top-widget referencing qmlnewappmenu
+
+2016-01-25  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* qmlnewappmenu/contents/ui/Menu.qml,
+	qmlnewappmenu/contents/ui/MenuItem.qml,
+	qmlnewappmenu/contents/ui/Title.qml,
+	qmlnewappmenu/contents/ui/main.qml: Add App Menu Title for
+	navigation, Remove highlight feature
+
+2016-01-22  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* qmlnewappmenu/contents/ui/SearchField.qml,
+	qmlnewappmenu/contents/ui/main.qml: Add SearchField.qml to be able
+	to search through applications
+
+2016-01-22  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* qmlnewappmenu/contents/ui/Menu.qml,
+	qmlnewappmenu/contents/ui/MenuItem.qml,
+	qmlnewappmenu/contents/ui/RightArrow.qml,
+	qmlnewappmenu/contents/ui/main.qml, qmlnewappmenu/metadata.desktop: 
+	First attempts of dynamic appmenuviewer
+
+2015-12-25  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* panel-top-widget/contents/ui/main.qml: Fix visual menu items BUG
+
+2015-12-24  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* ChangeLog: Create ChangeLog
+
 2015-12-23  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
 
 	* CMakeLists.txt, panel-bottom-widget/Doxyfile,
