@@ -9,6 +9,7 @@ Item {
     property int iconSize: 60 // iconSize is overwritten in main.qml , do not set iconSize
     property int smallIconSize: 60
     property int fontPointSize : 18
+    property int leftSideMargin : 6
 	property bool showDescription: true
     property bool isSearchMenu: false
 
@@ -54,7 +55,7 @@ Item {
 		anchors.right: scrollBar.visible ? scrollBar.left : menu.right
 		anchors.margins: 5
 		spacing: 2
-		highlightMoveDuration: 250
+        highlightMoveDuration: 250
 
 		// dirty hack to get rid of the binding loop in PlasmaComponents.ScrollBar when using the Up/Down keys to navigate the list
 		Timer {
@@ -72,12 +73,7 @@ Item {
 		}
 		// end dirty hack to get rid of the binding loop
 
-		highlight: PlasmaComponents.Highlight {
-			hover: menu.focus
-			width: menuListView.width // this is necessary so that the width of the focus updates when the menu is resized
-		}
-
-		delegate: MenuItem {
+        delegate: MenuItem {
 			id: menuItemDelegate
 			width: menuListView.width
 
@@ -93,6 +89,7 @@ Item {
 			iconSize: menu.iconSize
 			smallIconSize: menu.smallIconSize
             fontPointSize: menu.fontPointSize
+            leftSideMargin: menu.leftSideMargin
 			showDescription: menu.showDescription
 			onClicked: menu.itemSelected(source);
 			onEntered: menuListView.currentIndex = index;			

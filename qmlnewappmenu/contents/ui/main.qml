@@ -17,6 +17,9 @@ Rectangle {
     property int iconSize: 45
     property int smallIconSize: 20
     property int fontPointSize: 15
+    property int leftSideMargin : 10
+
+    property bool showDescription: true
 
     property variant appsMenu0List
     property variant appsMenu1List
@@ -48,11 +51,11 @@ Rectangle {
                 appsMenuList.currentIndex = currentMenu + 1;
                 var currentSubMenu = currentMenu - startIndex + 1;
                 eval("appsMenu" + currentSubMenu + "List = getMenuItems(source)");
-                appsMenuBreadCrumb.set(currentSubMenu + startIndex, entry["name"]);
+                appsTitle.set(currentSubMenu + startIndex, entry["name"]);
                 ++numOfVisibleSubMenus;
                 if (currentMenu < startIndex + numOfSubMenus - 1) {
                     eval("appsMenu" + (currentSubMenu + 1) + "List = new Array()"); // clean up old second level submenu
-                    appsMenuBreadCrumb.remove(currentSubMenu + startIndex + 1);
+                    appsTitle.remove(currentSubMenu + startIndex + 1);
                     numOfVisibleSubMenus = currentSubMenu;
                 }
 
@@ -203,12 +206,32 @@ Rectangle {
             x: 0
             y: searchField.text.length > 0 ? centralWidget.height : 0
 
+            Title {
+                id: appsTitle
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                    leftMargin: 6
+                }
+                fontPointSize : main.fontPointSize
+                leftSideMargin: main.leftSideMargin/2
+                currentIndex: appsMenuList.currentIndex
+                Component.onCompleted: {                    
+                    insert(0, i18n("Applications"));
+                }
+                onItemSelected: appsMenuList.currentIndex = index;
+            }
+
             ListView {
                 id: appsMenuList
-                anchors.fill:parent
+                anchors.top: appsTitle.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
                 spacing: 5
                 snapMode: ListView.SnapOneItem
-                orientation: ListView.Horizontal
+                orientation: ListView.Horizontal                
                 highlightMoveSpeed: 400
                 highlightMoveDuration: 150
                 clip: true
@@ -218,16 +241,16 @@ Rectangle {
                     id: appsMenu
                     width: (appsMenuList.width - appsMenuList.spacing) / numOfColumns
                     height: appsMenuList.height
-                    model: /*main.favoritesVisible && index == 0 ? favoritesList : */eval("appsMenu" + (index - startIndex) + "List")
-                    isEditing:false// !main.favoritesLocked && main.favoritesVisible
+                    model: eval("appsMenu" + (index - startIndex) + "List")
+                    isEditing:false
                     iconSize: main.iconSize
                     smallIconSize: main.smallIconSize
                     fontPointSize: main.fontPointSize
-                    showDescription: false //main.showDescription
+                    showDescription: main.showDescription
                     onItemSelected: openItem(source, index);
-
                     onGoLeft: main.goLeft();
                     onGoRight: main.goRight(source, index);
+                    leftSideMargin: main.leftSideMargin
                 }
 
                 onMovementEnded: { // make sure currentIndex has the correct value when flicking appsMenuList

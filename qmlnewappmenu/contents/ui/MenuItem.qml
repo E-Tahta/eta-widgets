@@ -19,7 +19,7 @@ Item {
 	property alias genericName: subLabel.text
 	property string entryPath
 	property bool isApp: true
-    property int iconMargin: 6
+    property int leftSideMargin: 6
     property bool isEditing: false
     property int iconSize: 22
     property int smallIconSize: 16
@@ -29,13 +29,13 @@ Item {
 	Item { // don't use Row so that we can add a left margin to icon
 		id: row
 		width: parent.width
-		height: Math.max(icon.height, label.height + subLabel.height) + 2 * iconMargin // use fixed height because otherwise menuListView.contentHeight is not calculated correctly (and even varies during scroll)
+        height: Math.max(icon.height, label.height + subLabel.height) + 2 * leftSideMargin // use fixed height because otherwise menuListView.contentHeight is not calculated correctly (and even varies during scroll)
 
 		QIconItem {
 			id: icon
 			anchors.left: parent.left
 			anchors.verticalCenter: parent.verticalCenter
-			anchors.leftMargin: iconMargin
+            anchors.leftMargin: leftSideMargin
 			width: iconSize
 			height: iconSize
 			icon: QIcon(iconName);
@@ -45,20 +45,23 @@ Item {
 			id: column
 			anchors.left: icon.right
 			anchors.verticalCenter: icon.verticalCenter;
-			anchors.leftMargin: iconMargin
+            anchors.leftMargin: leftSideMargin
 
 			PlasmaComponents.Label {
 				id: label
-                width: menuItem.width - 2 * iconMargin - icon.width - (arrowLoader.sourceComponent == arrow ? arrowLoader.width + iconMargin : 0)
+                width: menuItem.width - 2 * leftSideMargin - icon.width - (arrowLoader.sourceComponent == arrow ? arrowLoader.width + leftSideMargin : 0)
 				height: theme.defaultFont.mSize.height
                 font.pointSize: fontPointSize
-                font.bold : true
-				elide: Text.ElideRight
+                elide: Text.ElideRight
                 color: "white"
 			}
 
 			PlasmaComponents.Label {
 				id: subLabel
+                anchors {
+                    top:label.bottom
+                    topMargin:3
+                }
 				width: label.width
 				height: showDescription ? label.height : 0
                 font.pointSize: 8
@@ -74,7 +77,7 @@ Item {
 			sourceComponent: isApp ? undefined : arrow
 			anchors.right: parent.right
 			anchors.verticalCenter: parent.verticalCenter
-			anchors.rightMargin: iconMargin
+            anchors.rightMargin: leftSideMargin
 		}
 		Component {
 			id: arrow
@@ -87,10 +90,13 @@ Item {
 
 	MouseArea {
 		anchors.fill: parent
-		hoverEnabled: true
+        hoverEnabled: true
         visible: true
 		onClicked: menuItem.clicked();
-		onEntered: menuItem.entered();
+        onEntered: menuItem.entered();
+        onPressed: {label.color = "#FF6C00";}
+        onPressAndHold: {label.color = "#FF6C00";}
+        onReleased: {label.color = "white";}
 	}
 
 
