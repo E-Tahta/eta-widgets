@@ -1,3 +1,13 @@
+eta-widgets (0.2.0-1) unstable; urgency=medium
+
+  * [7d55bf7] First attempts of dynamic appmenuviewer
+  * [237798d] Add SearchField.qml to be able to search through applications
+  * [9cc6795] Add App Menu Title for navigation, Remove highlight feature
+  * [0acac45] Refactor panel-top-widget referencing qmlnewappmenu
+  * [4fe5eb2] Update Changelog
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Mon, 25 Jan 2016 15:45:13 +0200
+
 eta-widgets (0.1.2-1) unstable; urgency=medium
 
   * [389de87] Fix visual menu items BUG
