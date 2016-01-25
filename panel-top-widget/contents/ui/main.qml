@@ -1,40 +1,10 @@
-/*****************************************************************************
- *   Copyright (C) 2015 by Yunusemre Senturk                                 *
- *   <yunusemre.senturk@pardus.org.tr>                                       *
- *                                                                           *
- *   This program is free software; you can redistribute it and/or modify    *
- *   it under the terms of the GNU General Public License as published by    *
- *   the Free Software Foundation; either version 2 of the License, or       *
- *   (at your option) any later version.                                     *
- *                                                                           *
- *   This program is distributed in the hope that it will be useful,         *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of          *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           *
- *   GNU General Public License for more details.                            *
- *                                                                           *
- *   You should have received a copy of the GNU General Public License       *
- *   along with this program; if not, write to the                           *
- *   Free Software Foundation, Inc.,                                         *
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .          *
- *****************************************************************************/
-
 import QtQuick 1.1
-import Qt 4.7
 import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as Plasma
-import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
+import org.kde.plasma.components 0.1 as PlasmaComponents
 
-import "../code/apps.js" as Apps
 
-/**
- * This qml component works with pagestack infrastructure and acts like it.
- *
- * This component generates application list and application cathegory list
- * and also pop-ups the application cathegory list (sub-menu list).
- */
 Rectangle {
-    id: root
-    clip: true
+    id: main
     color : "#34353a"
 
     /**
@@ -57,377 +27,256 @@ Rectangle {
      */
     property string textFont
 
-    /**
-     * Indicates that the intial query string going to be calculated in
-     * getMenuItems function.
-     */
-    property string appSearchQuery : '/'
+    property int numOfSubMenus: 2 // the maximum number of nested submenus
+    property int numOfVisibleSubMenus: 0
+    property int startIndex: 0
+    property int numOfColumns: 1
 
-    property int i : 0
+    property int iconSize: 45
+    property int smallIconSize: 20
+    property int fontPointSize: 15
+    property int leftSideMargin : 10
 
-    /**
-     * Indicates that the counter veriable for the cathegories of
-     * applications.
-     */
-    property int categoryIndex : 0
+    property bool showDescription: true
 
-    /**
-     * Indicates that the alias property for appItem Object.
-     */
-    property alias appItem:appItem
+    property variant appsMenu0List
+    property variant appsMenu1List
+    property variant appsMenu2List
+    property variant appsMenu3List
+    property variant appsMenu4List
 
-    /**
-     * Indicates that the variant property for model for pagestack ListView
-     * model in ApplicaitonListView.qml .
-     */
-    property variant modelAlias
+     property Component compactRepresentation: WidgetCompactRepresenter {}
 
-    /**
-     * Indicates that the variant property for the source of an application.
-     */
-    property variant sources
+    function doMenuAction(action) {
+        var menu = searchField.text.length == 0 ? appsMenuList.currentItem : searchMenu;
+        menu.forceActiveFocus();
+        if (action == "down")
+            menu.incrementCurrentIndex();
+        else if (action == "up")
+            menu.decrementCurrentIndex();
+        else if (action == "select")
+            menu.selectCurrentItem();
+    }
 
-    /**
-     * Indicates that the variant property for the entry among applications.
-     */
-    property variant entry
+    function openItem(source, currentMenu) {
+        if (source == "")
+            return;
+        var entry = appsSource.data[source];
+        if (!entry["isApp"] && entry["entries"].length > 0) { // create and show submenu
 
-    /**
-     * Indicates that the actual drawable component compactRepresenter for
-     * this main.qml .
-     */
-    property Component compactRepresentation: WidgetCompactRepresenter {}
-
-    /**
-     * This functions generates the application list in the system and cathegories
-     * of the applicaitons.
-     *
-     * @param type:variant source see variant property
-     * @return type:bool
-     */
-    function getMenuItems(source) {
-        if(!sources) sources = appsSource.data[appSearchQuery]["entries"];
-        entry = appsSource.data[sources[i]];
-
-        if (sources[i] != "---" && entry && entry["name"]) {
-
-            if (Apps.appNames.indexOf(entry["name"]) < 0 && entry["name"] != ".hidden") {
-
-                Apps.appNames.push(entry["name"]);
-
-                if (entry["isApp"] && entry["display"]) {
-
-                    var app = {
-                        source: sources[i],
-                        name: entry["name"],
-                        genericName: entry["genericName"],
-                        menuId: entry["menuId"],
-                        iconName: entry["iconName"],
-                        entryPath: entry["entryPath"]
-                    };
-
-                    Apps.allApps.push(app);
-
-                    Apps.categories[Apps.categoryName].apps.push(app);
-
-                } else if(entry["entries"] && entry["entries"].length > 0) {
-
-                    // check if major category
-                    // subcategories don't have name
-                    // check number of / in name
-
-                    if(entry["name"] && sources[i].split('/').length == 2) {
-
-                        Apps.categoryNames.push({
-                            source: sources[i],
-                            name: entry["name"],
-                            genericName: entry["genericName"],
-                            iconName: entry["iconName"]
-                        });
-
-
-                        Apps.categories[entry["name"]] = {
-                            source: sources[i],
-                            genericName: entry["genericName"],
-                            iconName: entry["iconName"],
-                            entryPath: entry["entryPath"],
-                            menuId: entry["menuId"],
-                            apps: []
-                        };
-
-                    }
-
-                    appCategories.append({
-                        source: sources[i],
-                        name: entry["name"]
-                    });
+            // if currentMenu == 0 (i.e. in the favorites list), then there are no submenus
+            if (currentMenu < startIndex + numOfSubMenus) {
+                appsMenuList.currentIndex = currentMenu + 1;
+                var currentSubMenu = currentMenu - startIndex + 1;
+                eval("appsMenu" + currentSubMenu + "List = getMenuItems(source)");
+                appsTitle.set(currentSubMenu + startIndex, entry["name"]);
+                ++numOfVisibleSubMenus;
+                if (currentMenu < startIndex + numOfSubMenus - 1) {
+                    eval("appsMenu" + (currentSubMenu + 1) + "List = new Array()"); // clean up old second level submenu
+                    appsTitle.remove(currentSubMenu + startIndex + 1);
+                    numOfVisibleSubMenus = currentSubMenu;
                 }
 
+            } else {
+                console.log("Known crash with unknown solution :-(");
             }
-
+        } else { // launch app
+            var service = appsSource.serviceForSource(source);
+            var operation = service.operationDescription("launch");
+            service.startOperationCall(operation);
+            plasmoid.hidePopup();
         }
-
-        if(i < sources.length - 1) {
-            i++;
-            return true;
-        } else {
-
-            i = 0;
-
-            if(categoryIndex == appCategories.count) {
-                Apps.allApps.sort(sortByName);
-
-
-                categoriesList.model = Apps.categoryNames;
-
-                return false;
-            }
-
-            appSearchQuery = appCategories.get(categoryIndex).source;
-
-            if( appCategories.get(categoryIndex).name && appSearchQuery.split('/').length == 2 ) {
-                Apps.categoryName = appCategories.get(categoryIndex).name;
-            }
-
-            sources = appsSource.data[appSearchQuery]["entries"];
-
-            categoryIndex++;
-            return true;
-        }
-
     }
 
-
-    function sortByName(a, b) {
-        var nameA = a.name.toLowerCase(),
-            nameB = b.name.toLowerCase();
-
-        if (nameA < nameB) //sort string ascending
-            return -1
-        if (nameA > nameB)
-            return 1
-
-        return 0 //default return value (no sorting)
+    function goLeft() {
+        appsMenuList.decrementCurrentIndex();
     }
 
-    /**
-     * This function corrects the sub-menu names that determined
-     * as it is.
-     *
-     * @param type:string modelname
-     * @return type:string modelname
-     */
-    function checkName(modelname) {
-     if(modelname=="All")
-         return "Tüm Uygulamalar"
-     else if(modelname=="Bulunanlar")
-         return "Eğitim"
-     else
-         return modelname
-    }
-
-    /**
-     * This function corrects the icon names according to its name.
-     *
-     * @param type:string modelname
-     * @return type:string iconname
-     */
-    //FIXME: This function works arbitrary make it dynamic please!
-    function checkIcon(modelname) {
-        if(modelname == "All")
-            return "tum_uygulamalar"
-        else if(modelname == "Ayarlar")
-            return "preferences-system"
-        else if(modelname == "Çoklu Ortam")
-            return "applications-multimedia"
-        else if(modelname == "Eğitim")
-            return "applications-education"
-        else if(modelname == "Geliştirme")
-            return "applications-development"
-        else if(modelname == "Grafik")
-            return "applications-graphics"
-        else if(modelname == "İnternet")
-            return "applications-internet"
-        else if(modelname == "Ofis")
-            return "applications-office"
-        else if(modelname == "Sistem")
-            return "applications-system"
-        else if(modelname == "Oyunlar")
-            return "applications-games"
-        else if(modelname == "Yardımcı Programlar")
-            return "applications-utilities"
+    function goRight(source, currentMenu) {
+        var entry = appsSource.data[source];
+        if (source != "" && !entry["isApp"] && entry["entries"].length > 0) // create and show submenu
+            openItem(source, currentMenu);
         else
-            return "applications-education" //"tum_uygulamalar"
+            appsMenuList.incrementCurrentIndex();
     }
 
-    /**
-     * This function determines the correct application name is set or not.
-     *
-     * @param type:string appname
-     * @return type:bool
-     */
-    function checkApplication(appname) {
-        if(appname == screenData.data["Local"]["name"].toUpperCase())
+    function isNonHiddenAppOrNonEmptyDirectory(source, entry) {
+        if (source == "---" // the entry is a separator
+            || entry["name"] == ".hidden"
+            || !entry["display"]) // respect NoDisplay=true in .desktop file
             return false;
-        else
+
+        if (entry["isApp"])
             return true;
+
+        // at this point we have a non-hidden directory, let us check whether it is empty
+        var sources = entry["entries"];
+        if (sources.length <= 0) // the directory is empty
+            return false;
+
+        if (main.checkEmptySubmenusThoroughly) { // the following is slower
+            for (var i = 0; i < sources.length; i++) {
+                var entry = appsSource.data[sources[i]];
+                if (isNonHiddenAppOrNonEmptyDirectory(sources[i], entry))
+                    return true;
+            }
+            return false;
+        }
+        return true;
     }
 
-    ListModel {
-        id: appCategories
+    function getMenuItems(source) {
+        var model = new Array();
+        var sources = appsSource.data[source]["entries"];
+        var names = new Array();
+        for (var i = 0; i < sources.length; i++) {
+            var entry = appsSource.data[sources[i]];
+            if (isNonHiddenAppOrNonEmptyDirectory(sources[i], entry) && names.indexOf(entry["name"]) < 0) { // the entry has not already been found
+                names.push(entry["name"]);
+                model.push({"DataEngineSource" : sources[i], "name" : entry["name"], "genericName" : entry["genericName"], "iconName" : entry["iconName"], "isApp" : entry["isApp"], "entryPath" : entry["entryPath"]});
+            }
+        }
+        return model;
     }
 
-    /**
-     * This is the plasma data-engine that provides information about
-     * applications installed on the system.
-     */
+    function refresh() {
+        appsMenu0List = getMenuItems("/");
+    }
+
+    function reset() {
+        searchField.text = "";
+        appsMenuList.currentIndex = 0;
+    }
+    function popupEventSlot(shown) {
+        if (shown) {
+            if (resetOnShow)
+                reset();
+            searchField.forceActiveFocus();
+        }
+    }
+
+    function activateSlot() {
+        searchField.forceActiveFocus();
+    }
+
     PlasmaCore.DataSource {
         id: appsSource
-        dataEngine: "apps"
+        engine: "apps"
+
         onSourceAdded: {
             connectSource(source);
-            appSearchQuery = source;
-            categorizeAppsTimer.start();
         }
+
         Component.onCompleted: {
             connectedSources = sources;
-            categorizeAppsTimer.start();
+            refresh();
         }
     }
 
-    // App Categorization and Search "Thread"
-    Timer {
-        id: categorizeAppsTimer
-        repeat: true
-        interval: 1
-        triggeredOnStart: false
-        onTriggered: {
-            if(!getMenuItems(appSearchQuery)) {
-                stop();
-            }
-        }
+    SearchField {
+        id: searchField
+        anchors.top: main.top
+        anchors.left: main.left
+        anchors.right: main.right
+        anchors.topMargin: screenData.data["Local"]["height"]*17/100 + 3
+        anchors.leftMargin: leftSideMargin
+        anchors.rightMargin: leftSideMargin
+        dataSource: appsSource
+        searchMenu: searchMenu
+
     }
 
-    Component {
-        id: appItem
-
-        Item {
-            width: screenData.data["Local"]["width"]*13/100
-            height: minimumWidth*20/100
-            Plasma.ToolButton {
-                id:tb
-                iconSource: QIcon(modelData.iconName)
-
-                anchors.fill: parent
-
-                onClicked: {
-                    var operation = appsSource.serviceForSource(modelData.menuId).operationDescription("launch");
-                    appsSource.serviceForSource(modelData.menuId).startOperationCall(operation);
-                    pageStack.pop();
-
-                }
-            }
-
-            Text {
-                id:appname
-                font.family:textFont
-                text:modelData.name.toUpperCase()
-                font.bold: true
-                verticalAlignment: Text.AlignVCenter
-                font.pointSize: 10
-                color: "#ffffff"
-
-                anchors{
-                    left:tb.left
-                    leftMargin: minimumWidth*20/100 + 5
-                    verticalCenter:tb.verticalCenter
-                }
-            }
-        }
-    }
-    Component {
-        id: categoryItem
-        Item {
-            id:categoryItemMain
-            visible:checkCathegory(modelData.name)
-            enabled:checkCathegory(modelData.name)
-            width: screenData.data["Local"]["width"]*13/100
-            height: (minimumWidth*20/100) * checkCathegory(modelData.name)
-            Plasma.ToolButton {
-                id:tbMenu
-                iconSource: QIcon(checkIcon(modelData.name))
-                anchors.fill:parent
-                onClicked: {
-                    categoriesList.currentIndex = index;
-                    modelAlias = Apps.categories[modelData.name].apps;
-                    pageStack.push(Qt.createComponent(plasmoid.file("ui", "ApplicationListView.qml")));
-                }
-                Text {
-                    color: "#ffffff"
-                    font.family:textFont
-                    text: checkName(modelData.name).toUpperCase()
-                    font.bold: true
-                    verticalAlignment: Text.AlignVCenter
-                    font.pointSize: 9
-                    anchors {
-                        left:tbMenu.left
-                        leftMargin: minimumWidth*20/100 + 5
-                        verticalCenter:tbMenu.verticalCenter
-                    }
-                }// Text
-            }// Plasma Toolbutton
-        }// Item
-    }// categoryItem
-
-    /**
-     * This function hides the unwanted sub-menu list items.
-     *
-     * @param type:string cname
-     * @return type:bool
-     */
-    function checkCathegory(cname) {
-        if(cname == "Ayarlar")
-            return false
-        else if(cname == "Geliştirme")
-            return false
-        else if(cname == "Oyunlar")
-            return false
-        else if(cname == "Sistem")
-            return false
-        else if(cname == "Yardımcı Programlar")
-            return false
-        else if(cname == "Eğitim")
-            return false
-        else
-            return true
-    }
-
-    Plasma.PageStack {
-        id: pageStack
-        toolBar: toolBar
+    Item {
+        id: centralWidget
+        anchors.top: searchField.bottom
+        anchors.left: main.left
+        anchors.right: main.right
+        anchors.bottom: parent.bottom
+        anchors.topMargin: leftSideMargin
         clip: true
-        anchors {
-            top: toolBar.bottom
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-        }
-        initialPage: categoriesList
-    }
 
-    ListView {
-        id: categoriesList
-        width: minimumWidth
-        height: minimumWidth * 20/100 * count
-        anchors {
-            top: parent.top
-            topMargin : minimumWidth * 80 / 100
-            left: parent.left
-            leftMargin:minimumWidth*9/100
-        }
-        delegate: categoryItem
-    }
+        Menu {
+            id: searchMenu
+            width: centralWidget.width
+            height: centralWidget.height
+            x: 0
+            y: searchField.text.length > 0 ? 0 : -centralWidget.height
+            clip: true
+            model: searchField.model
+            iconSize: main.iconSize
+            smallIconSize: main.smallIconSize
+            fontPointSize: main.fontPointSize
+            showDescription: main.showDescription
+            isSearchMenu: true
+            onItemSelected: openItem(source, 0);
 
+
+            Behavior on y {
+                NumberAnimation { duration: 300; easing.type: Easing.Linear }
+            }
+        }
+
+        Item {
+            id: appsMenuListContainer
+            width: centralWidget.width
+            height: centralWidget.height
+            x: 0
+            y: searchField.text.length > 0 ? centralWidget.height : 0
+
+            Title {
+                id: appsTitle
+                anchors {
+                    top: searchMenu.bottom
+                    left: parent.left
+                    right: parent.right
+                    leftMargin: leftSideMargin
+                    topMargin: leftSideMargin
+                }
+                fontPointSize : main.fontPointSize
+                leftSideMargin: main.leftSideMargin
+                currentIndex: appsMenuList.currentIndex
+                Component.onCompleted: {                    
+                    insert(0, i18n("Applications"));
+                }
+                onItemSelected: appsMenuList.currentIndex = index;
+            }
+
+            ListView {
+                id: appsMenuList
+                anchors.top: appsTitle.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                spacing: 5
+                snapMode: ListView.SnapOneItem
+                orientation: ListView.Horizontal                
+                highlightMoveSpeed: 400
+                highlightMoveDuration: 150
+                clip: true
+                focus: true;
+                model: main.numOfSubMenus + 1 + main.startIndex// this dramatically slows down opening a submenu
+                delegate: Menu {
+                    id: appsMenu
+                    width: (appsMenuList.width - appsMenuList.spacing) / numOfColumns
+                    height: appsMenuList.height
+                    model: eval("appsMenu" + (index - startIndex) + "List")
+                    isEditing:false
+                    iconSize: main.iconSize
+                    smallIconSize: main.smallIconSize
+                    fontPointSize: main.fontPointSize
+                    showDescription: main.showDescription
+                    onItemSelected: openItem(source, index);
+                    onGoLeft: main.goLeft();
+                    onGoRight: main.goRight(source, index);
+                    leftSideMargin: main.leftSideMargin
+                }
+
+                onMovementEnded: { // make sure currentIndex has the correct value when flicking appsMenuList
+                    currentIndex = contentX / contentWidth * count;
+                }
+            }
+        }
+    }
     /**
      * This is the plasma data-engine that provides current user information.
      */
@@ -445,11 +294,10 @@ Rectangle {
     }
 
     Component.onCompleted: {
-        root.minimumHeight = screenData.data["Local"]["height"];
-        root.minimumWidth = screenData.data["Local"]["width"]*16/100;
+        main.minimumHeight = screenData.data["Local"]["height"];
+        main.minimumWidth = screenData.data["Local"]["width"]*16/100;
         plasmoid.addEventListener( 'ConfigChanged', configChanged );
         containerBackgroundColor = plasmoid.readConfig( "panelColor" );
         textFont = plasmoid.readConfig( "textFont" );
     }
 }
-

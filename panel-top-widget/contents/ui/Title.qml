@@ -57,6 +57,7 @@ Item {
             model: ListModel {}
 			delegate: PlasmaComponents.Label {
                 id: text
+                anchors.verticalCenter: parent
                 width: title.width / repeater.model.count
                 font.pointSize: title.fontPointSize *3/4
                 font.weight: title.currentIndex == index ? Font.Bold : Font.Normal
