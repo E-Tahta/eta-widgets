@@ -44,7 +44,7 @@ Rectangle {
                 left:parent.left
                 leftMargin: keyboardclient.width*9/100
             }
-            onClicked: { plasmoid.runCommand("qdbus",["org.eta.etakeyboard","/EtaKeyboard","org.eta.etakeyboard.toggle"]); }
+            onClicked: { plasmoid.runCommand("qdbus",["org.eta.virtualkeyboard","/VirtualKeyboard","org.eta.virtualkeyboard.toggle"]); }
         }
     }
     Item {
@@ -64,7 +64,7 @@ Rectangle {
             }
             MouseArea {
                 anchors.fill:parent
-                onClicked: { plasmoid.runCommand("qdbus",["org.eta.etakeyboard","/EtaKeyboard","org.eta.etakeyboard.toggle"]);}
+                onClicked: { plasmoid.runCommand("qdbus",["org.eta.virtualkeyboard","/VirtualKeyboard","org.eta.virtualkeyboard.toggle"]);}
             }
         }
     }
