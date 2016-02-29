@@ -1,3 +1,9 @@
+eta-widgets (0.2.2-1) unstable; urgency=medium
+
+  * Change upstream source code
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Mon, 29 Feb 2016 11:57:00 +0200
+
 eta-widgets (0.2.1-1) unstable; urgency=medium
 
   * [2457922] Change dbus path to etak(virtualkeyboard)
