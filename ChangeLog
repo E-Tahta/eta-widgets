@@ -1,3 +1,17 @@
+2016-02-29  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* panel-bottom-widget/contents/ui/main.qml: Add phonon settings
+	button
+
+2016-02-12  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* panel-bottom-widget/contents/ui/KeyboardClient.qml: Change dbus
+	path to etak(virtualkeyboard)
+
+2016-01-25  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
+
+	* ChangeLog: Update Changelog
+
 2016-01-25  Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
 
 	* panel-top-widget/contents/ui/ApplicationListView.qml,
