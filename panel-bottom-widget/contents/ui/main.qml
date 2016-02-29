@@ -45,7 +45,11 @@ Item {
      * Indicates that the minimum height of the widget regarding the screen
      * resolution.
      */
-    property int minimumHeight : keyboardclient.height+volumeChanger.height + printscreen.height+bottomseperator.height+closer.height
+    property int minimumHeight : keyboardclient.height +
+                                 volumeChanger.height +
+                                 printscreen.height +
+                                 bottomseperator.height +
+                                 closer.height
 
     /**
      * Indicates that the global veriable for general left & right alignment
@@ -76,14 +80,38 @@ Item {
             visible: true
         }
 
-        VolumeChanger {
-            id:volumeChanger
-            volumeline: minimumWidth *44 /100
-            height: minimumWidth *14/100
-            color:"#ffffff"
-            width: minimumWidth
-            visible: true
-        }
+
+            VolumeChanger {
+                id:volumeChanger
+                volumeline: minimumWidth *44 /100
+                height: minimumWidth *14/100
+                color:"#ffffff"
+                width: minimumWidth
+                visible: true
+                Item {
+                    id:toolbuttonsoundsettingscontainer
+                    width: minimumWidth *13/100
+                    height: minimumWidth *13/100
+                    anchors {
+                        right: parent.right
+                        rightMargin: lineAlign
+                        verticalCenter: parent.verticalCenter
+                    }
+                    PlasmaWidgets.IconWidget {
+                        id: soundsettingsIcon
+                        icon: QIcon("unity-tweak-tool")
+                        anchors.fill:parent
+                        onClicked: {
+                            plasmoid.runCommand("qdbus",
+                            ["org.kde.kmix",
+                             "/kmix/KMixWindow/actions/launch_kdesoundsetup",
+                             "org.qtproject.Qt.QAction.trigger"]);
+                        }
+                    }
+                }
+            }
+
+
         Row {
             Rectangle {
                 id:printscreen
@@ -164,7 +192,7 @@ Item {
                       height: minimumWidth *13/100
                       anchors {
                           left:  parent.left
-                          leftMargin: lineAlign -10
+                          leftMargin: lineAlign
                           verticalCenter: parent.verticalCenter
                       }
                       PlasmaWidgets.IconWidget {
