@@ -1,3 +1,10 @@
+eta-widgets (0.2.3-1) unstable; urgency=medium
+
+  * local package
+  * [c57b80d] Add pardus.svg background to search-widget
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Thu, 10 Mar 2016 12:01:46 +0200
+
 eta-widgets (0.2.2-1) unstable; urgency=medium
 
   * Change upstream source code
