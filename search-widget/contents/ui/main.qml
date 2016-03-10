@@ -30,6 +30,15 @@ Item {
     property string searchQuery : ''
     property int mininumStringLength : 3
 
+    Image {
+        id: pardusSvg
+        source: "/usr/share/icons/EtaColorfulFlat/apps/scalable/pardus.svg"
+        anchors.centerIn: parent
+        width: searchplasmoid.minimumWidth - 20
+        height: pardusSvg.width * 415 / 450
+        opacity: 0.1
+    }
+
     PlasmaWidgets.LineEdit {
         id: searchField
         text: ""
