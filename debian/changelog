@@ -1,3 +1,10 @@
+eta-widgets (0.2.4-1) unstable; urgency=medium
+
+  * local package
+  * [e362249] Add little qdbus hack into kmix current master control via qml
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Thu, 10 Mar 2016 17:25:23 +0200
+
 eta-widgets (0.2.3-1) unstable; urgency=medium
 
   * local package
