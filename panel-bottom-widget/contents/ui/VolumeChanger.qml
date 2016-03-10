@@ -213,6 +213,12 @@ Rectangle {
             }
         }
         Component.onCompleted: {
+            plasmoid.runCommand("qdbus",
+                                ["org.kde.kmix",
+                                 "/Mixers",
+                                 "org.kde.KMix.MixSet.setCurrentMaster",
+                                 "PulseAudio::Playback_Devices:1",
+                                 "alsa_output.pci-0000_00_01.1.hdmi-stereo"]);
             if(mixerSource.data["Mixers"].Running) connectToDevice()
         }
     }
