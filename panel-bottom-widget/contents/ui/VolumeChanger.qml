@@ -164,7 +164,7 @@ Rectangle {
      */
     Timer {
         id: changeVolume
-        interval: 50
+        interval: 0
         running: false
         repeat: false
         onTriggered: {
@@ -194,7 +194,7 @@ Rectangle {
         connectedSources: [ "Mixers" ]
         onDataChanged: {
             // connect after kmix was started
-            if(mixerSource.data["Mixers"].Running) {
+            if(mixerSource.data["Mixers"].Running) {                
                 if(controller) {
                     if(volumeChangedBySlider) {
                         volumeChangedBySlider = false;
@@ -220,6 +220,15 @@ Rectangle {
                                  "PulseAudio::Playback_Devices:1",
                                  "alsa_output.pci-0000_00_01.1.hdmi-stereo"]);
             if(mixerSource.data["Mixers"].Running) connectToDevice()
+        }        
+    }
+    Timer{
+        id:checkMaster
+        repeat: true
+        running: true
+        interval: 1000
+        onTriggered: {
+            connectToDevice();
         }
     }
 }
