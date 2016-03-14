@@ -1,3 +1,10 @@
+eta-widgets (0.2.6-1) unstable; urgency=medium
+
+  * local package
+  * [cb858ba] Redefine the command behind the sound settings button
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Mon, 14 Mar 2016 15:54:34 +0200
+
 eta-widgets (0.2.5-1) unstable; urgency=medium
 
   * local package
