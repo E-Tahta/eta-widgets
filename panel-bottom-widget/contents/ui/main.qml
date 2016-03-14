@@ -104,8 +104,8 @@ Item {
                         onClicked: {
                             plasmoid.runCommand("qdbus",
                             ["org.kde.kmix",
-                             "/kmix/KMixWindow/actions/launch_kdesoundsetup",
-                             "org.qtproject.Qt.QAction.trigger"]);
+                             "/kmix/KMixWindow",
+                             "org.qtproject.Qt.QWidget.show"]);
                         }
                     }
                 }
