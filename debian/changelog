@@ -1,3 +1,10 @@
+eta-widgets (0.2.7-1) unstable; urgency=medium
+
+  * local package
+  * [15b3099] Add gesture control button into panel-bottom-widget
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Wed, 16 Mar 2016 15:26:59 +0200
+
 eta-widgets (0.2.6-1) unstable; urgency=medium
 
   * local package
