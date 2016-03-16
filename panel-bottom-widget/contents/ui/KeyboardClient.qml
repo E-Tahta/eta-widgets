@@ -57,9 +57,10 @@ Rectangle {
             color: "#969699"
             font.bold : true
             font.pointSize: 8.5
+
             anchors {
                 left:parent.left
-                leftMargin: root.width*9/100 + keyboardIcon.width + root.width*7/100
+                leftMargin: root.width*9/100 + keyboardIcon.width //+ root.width*7/100
                 verticalCenter:parent.verticalCenter
             }
             MouseArea {

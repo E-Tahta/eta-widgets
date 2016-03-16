@@ -72,14 +72,24 @@ Item {
     Column {        
         anchors.fill:parent
 
+        Row{
+
         KeyboardClient{
             id:keyboardclient
             height: minimumWidth *19/100
             color:"#ffffff"
-            width: minimumWidth
+            width: minimumWidth/2
             visible: true
         }
-
+        EtaGestemas {
+            id:etagestemas
+            height: minimumWidth *19/100
+            color:"#ffffff"
+            width: minimumWidth/2
+            visible: true
+            anchors.left: keyboardclient.right
+        }
+}
 
             VolumeChanger {
                 id:volumeChanger
