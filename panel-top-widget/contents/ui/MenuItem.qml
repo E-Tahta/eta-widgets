@@ -92,7 +92,12 @@ Item {
 		anchors.fill: parent
         hoverEnabled: true
         visible: true
-		onClicked: menuItem.clicked();
+        onClicked: {
+            menuItem.clicked();
+            if (menuItem.isApp) {
+                main.reset();
+            }
+        }
         onEntered: menuItem.entered();
         onPressed: {label.color = "#FF6C00";}
         onPressAndHold: {label.color = "#FF6C00";}
