@@ -388,7 +388,26 @@ Item {
 
                 onPressAndHold: { ebatext.color= "#FF6C00"; }
                 onPressed: {ebatext.color= "#FF6C00"; }
-                onReleased: {plasmoid.runCommand("firefox",["-new-window", "http://eba.gov.tr"]); ebatext.color= "#969699";}
+
+
+
+                onReleased: {
+                    if(widgetrepresenter.state == 'visible') {
+                        widgetrepresenter.state = 'invisible';
+                        plasmoid.runCommand("qdbus",["org.eta.virtualkeyboard",
+                                                     "/VirtualKeyboard",
+                                                     "org.eta.virtualkeyboard.hidePinInput"]);
+                        ebatext.color= "#969699";
+                    } else {
+                        widgetrepresenter.state = 'visible';
+                        if(passRect.isActive){
+                            plasmoid.runCommand("qdbus",["org.eta.virtualkeyboard",
+                                                         "/VirtualKeyboard",
+                                                         "org.eta.virtualkeyboard.showPinInput"]);
+                        }
+                        ebatext.color= "#FF6C00";
+                    }
+                }
             }
         }
     }//main column
@@ -407,6 +426,35 @@ Item {
         }
         return dolphin.height+usb.height+libre.height+firefox.height+eba.height;
     }
+
+    PasswordInput {
+        id:passRect
+        width: minimumWidth
+        height: eba.height
+        x:widgetrepresenter.x + passRect.width
+        y:eba.y
+        z:-1
+        opacity: 0
+
+    }
+
+    states: [
+        State {
+            name: 'visible'
+            PropertyChanges { target: passRect; x: widgetrepresenter.x; y: eba.y; z:100; opacity:1; }
+        },
+        State {
+            name: 'invisible'
+            PropertyChanges { target: passRect;
+                x: widgetrepresenter.x + passRect.width ;
+                y: eba.y; z:-1; opacity:0; }
+        }
+    ]
+    transitions: [
+        Transition {
+            NumberAnimation { properties: "x,y,opacity"; duration: 200 }
+        }
+    ]
 
     /**
      * This is the plasma data-engine that provides current user information.
