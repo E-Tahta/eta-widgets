@@ -1,3 +1,10 @@
+eta-widgets (0.2.10-1) unstable; urgency=medium
+
+  * local package
+  * [9a4e506] Add pin input mechanism into eba part
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Wed, 22 Jun 2016 16:04:40 +0300
+
 eta-widgets (0.2.9-1) unstable; urgency=medium
 
   * local package
