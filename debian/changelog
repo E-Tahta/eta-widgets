@@ -1,3 +1,10 @@
+eta-widgets (0.2.11-1) unstable; urgency=medium
+
+  * local package
+  * [a8b72bd] Fix connection onto eta_usblogin
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Thu, 23 Jun 2016 18:16:09 +0300
+
 eta-widgets (0.2.10-1) unstable; urgency=medium
 
   * local package
