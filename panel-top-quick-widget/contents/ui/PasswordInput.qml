@@ -170,7 +170,7 @@ Rectangle {
                         if (inp.text.length == 4) {
                             widgetrepresenter.state = 'invisible';
 
-                            plasmoid.runCommand("/usr/bin/eta_usblogin",["eba", inp.text.toString()]);
+                            plasmoid.runCommand("/usr/bin/eta_usblogin",["eba","-p",inp.text.toString()]);
                             plasmoid.runCommand("qdbus",["org.eta.virtualkeyboard",
                                                          "/VirtualKeyboard",
                                                          "org.eta.virtualkeyboard.hidePinInput"]);
