@@ -1,3 +1,10 @@
+eta-widgets (0.2.12-1) unstable; urgency=medium
+
+  * local package
+  * [1afc922] Fix ogrenci user visibility and top widget color text relation
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Thu, 30 Jun 2016 10:31:33 +0300
+
 eta-widgets (0.2.11-1) unstable; urgency=medium
 
   * local package
