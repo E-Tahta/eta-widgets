@@ -21,6 +21,7 @@ Rectangle {
      * Indicates that the background color of the widget.
      */
     property string containerBackgroundColor
+    property string containerTextColor : "#ffffff"
 
     /**
      * Indicates that the font of the texts in the widget.
@@ -45,7 +46,12 @@ Rectangle {
     property variant appsMenu3List
     property variant appsMenu4List
 
-     property Component compactRepresentation: WidgetCompactRepresenter {}
+    property Component compactRepresentation: WidgetCompactRepresenter {}
+
+    onContainerBackgroundColorChanged: {
+        containerBackgroundColor == "#ffffff" ? containerTextColor = "#6d6f76"
+                                              : containerTextColor = "#ffffff";
+    }
 
     function doMenuAction(action) {
         var menu = searchField.text.length == 0 ? appsMenuList.currentItem : searchMenu;

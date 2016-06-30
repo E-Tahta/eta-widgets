@@ -103,7 +103,7 @@ Item {
                             text: Qt.formatDate(
                                       dataSource.data["Local"]["Date"],
                                       "dddd, d MMMM yyyy")
-                            color: "#ffffff"
+                            color: containerTextColor
                             horizontalAlignment: Text.AlignLeft
                             anchors {
                                 left: parent.left
@@ -118,7 +118,7 @@ Item {
                             text: (Qt.formatTime(
                                        dataSource.data["Local"]["Time"],
                                        "h:mmap")).toString().slice(0, -2)
-                            color: "#ffffff"
+                            color: containerTextColor
                             horizontalAlignment: Text.AlignLeft
                             anchors {
                                 top: date.bottom
@@ -179,7 +179,7 @@ Item {
                             id: nameSurname
                             font.family: textFont
                             text: userDataSource.data["Local"]["fullname"].toUpperCase()
-                            color: "#ffffff"
+                            color: containerTextColor
                             font.pointSize: minimumWidth * 5 / 100
                             font.bold: true
                             elide: Text.ElideLeft
@@ -193,7 +193,7 @@ Item {
                             id: branch
                             font.family: textFont
                             text: userDataSource.data["Local"]["loginname"] // hocabranş
-                            color: "#ffffff"
+                            color: containerTextColor
                             font.pointSize: minimumWidth * 3 / 100
                             font.bold: false
                             elide: Text.ElideLeft

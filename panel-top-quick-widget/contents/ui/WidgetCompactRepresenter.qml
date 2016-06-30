@@ -65,6 +65,8 @@ Item {
      */
     property int textAlign: minimumWidth*4/100
 
+    property string username : userDataSource.data["Local"]["loginname"]
+
     Column {
         anchors.fill:parent
         Rectangle {
@@ -331,7 +333,10 @@ Item {
 
                 onPressAndHold: { firefoxtext.color= "#FF6C00"; }
                 onPressed: {firefoxtext.color= "#FF6C00"; }
-                onReleased: {plasmoid.runCommand("firefox"); firefoxtext.color= "#969699";}
+                onReleased: {
+                    plasmoid.runCommand("firefox");
+                    firefoxtext.color= "#969699";
+                }
             }
         }
         Rectangle {
@@ -392,20 +397,27 @@ Item {
 
 
                 onReleased: {
-                    if(widgetrepresenter.state == 'visible') {
-                        widgetrepresenter.state = 'invisible';
-                        plasmoid.runCommand("qdbus",["org.eta.virtualkeyboard",
-                                                     "/VirtualKeyboard",
-                                                     "org.eta.virtualkeyboard.hidePinInput"]);
-                        ebatext.color= "#969699";
-                    } else {
-                        widgetrepresenter.state = 'visible';
-                        if(passRect.isActive){
+                    if(widgetrepresenter.username != "ogrenci"){
+                        if(widgetrepresenter.state == 'visible') {
+                            widgetrepresenter.state = 'invisible';
                             plasmoid.runCommand("qdbus",["org.eta.virtualkeyboard",
                                                          "/VirtualKeyboard",
-                                                         "org.eta.virtualkeyboard.showPinInput"]);
+                                                         "org.eta.virtualkeyboard.hidePinInput"]);
+                            ebatext.color= "#969699";
+                        } else {
+                            widgetrepresenter.state = 'visible';
+                            if(passRect.isActive){
+                                plasmoid.runCommand("qdbus",["org.eta.virtualkeyboard",
+                                                             "/VirtualKeyboard",
+                                                             "org.eta.virtualkeyboard.showPinInput"]);
+                            }
+                            ebatext.color= "#FF6C00";
                         }
-                        ebatext.color= "#FF6C00";
+                    } else {
+                        widgetrepresenter.state = 'invisible';
+                        ebatext.color= "#969699";
+                        plasmoid.runCommand("firefox",["-new-window",
+                                                       "http://eba.gov.tr"]);
                     }
                 }
             }
@@ -422,6 +434,7 @@ Item {
     function checkUser(username) {
         if(username=="ogrenci") {
             usb.visible=false;
+            passRect.visible = false;
             return dolphin.height+libre.height+firefox.height+eba.height;
         }
         return dolphin.height+usb.height+libre.height+firefox.height+eba.height;
