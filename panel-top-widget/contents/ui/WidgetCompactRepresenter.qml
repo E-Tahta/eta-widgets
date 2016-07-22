@@ -221,8 +221,8 @@ Item {
                 }
                 Item {
                     id: toolbuttonappcontainer
-                    width: minimumWidth * 18 / 100
-                    height: minimumWidth * 18 / 100
+                    width: minimumWidth * 21 / 100
+                    height: minimumWidth * 21 / 100
                     anchors {
                         left: parent.left
                         leftMargin: leftrightAlign
@@ -230,7 +230,7 @@ Item {
                     }
                     PlasmaWidgets.IconWidget {
                         id: appIcon
-                        icon: QIcon("tum_uygulamalar")
+                        icon: QIcon("colors")
                         anchors.fill: parent
                         onClicked: {
                             plasmoid.togglePopup()

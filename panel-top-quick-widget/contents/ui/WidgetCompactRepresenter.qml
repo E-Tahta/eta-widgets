@@ -169,7 +169,7 @@ Item {
                             verticalCenter: parent.verticalCenter
                             verticalCenterOffset: 0
                         }
-                    }//label
+                    }//label                    
                 }//item labelcontainer
                 Item {
                     id:usbarrowContainer
@@ -220,6 +220,7 @@ Item {
                 onPressed: {usbtext.color= "#FF6C00"; }
                 onReleased: {
                     usbtext.color= "#969699";
+                    plasmoid.togglePopup();
                     //plasmoid.runCommand("dolphin",[mountPoint]);}
                 }
             }
@@ -394,9 +395,8 @@ Item {
                 onPressAndHold: { ebatext.color= "#FF6C00"; }
                 onPressed: {ebatext.color= "#FF6C00"; }
 
-
-
                 onReleased: {
+                    /*
                     if(widgetrepresenter.username != "ogrenci"){
                         if(widgetrepresenter.state == 'visible') {
                             widgetrepresenter.state = 'invisible';
@@ -419,6 +419,11 @@ Item {
                         plasmoid.runCommand("firefox",["-new-window",
                                                        "http://eba.gov.tr"]);
                     }
+                    */
+                    widgetrepresenter.state = 'invisible';
+                    ebatext.color= "#969699";
+                    plasmoid.runCommand("firefox",["-new-window",
+                                                   "http://eba.gov.tr"]);
                 }
             }
         }
