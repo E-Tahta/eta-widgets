@@ -1,3 +1,10 @@
+eta-widgets (0.2.13-1) unstable; urgency=medium
+
+  * local package
+  * [8abc6ed] Change all applications icon and reverse changes on eba
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Fri, 22 Jul 2016 15:19:43 +0300
+
 eta-widgets (0.2.12-1) unstable; urgency=medium
 
   * local package
