@@ -178,17 +178,17 @@ Item {
                     anchors {
                         right: parent.right
                     }
-                    /*
+
                     PlasmaWidgets.IconWidget
                     {
                       id: usbarrowIcon
-                      icon:QIcon("gtk-goto-last-ltr")
+                      icon:QIcon("usb-arrow")
                       anchors.fill:parent
                       onClicked:{
                             plasmoid.togglePopup();
                       }
                     }
-                    */
+                    /*
                     Image {
                         id: usbarrowIcon
                         source: "../images/usb_arrow.png"
@@ -205,6 +205,7 @@ Item {
                             }
                         }
                     }
+                    */
                 }
             }//Row
             MouseArea {
