@@ -66,15 +66,65 @@ Rectangle {
      * qml components.
      */
     property int volumeline
-    Row {
+    Column {
         anchors {
-            left:parent.left
-            leftMargin:leftrightAlign
+            top: parent.top
+            topMargin: lineAlign / 2
+            horizontalCenter: parent.horizontalCenter
         }
         Item {
+            id:volumeslidercontainer
+            width: volumeChanger.width/2
+            height:  volumeline
+            Rectangle {
+                anchors.fill:parent
+                color:"transparent"
+                Rectangle {
+                    height: volumeline
+                    width: 2
+                    color:"#969699"
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                }
+            }
+            PlasmaWidgets.Slider {
+                id: volumeSlider
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+                orientation: Qt.Vertical
+                maximum: 100
+                minimum: 0
+                value: level
+                height: volumeline
+                onValueChanged: {
+                    if(controller) {
+                        if(volumeChangedByEngine) {
+                            volumeChangedByEngine = false;
+                        } else {
+                            volumeChangedBySlider = true;
+                            level = volumeSlider.value;
+                            previousVol = level;
+                            changeVolume.restart();
+                        }
+                    }
+                    if(level == 0)
+                        soundicon.icon= QIcon("audio-volume-muted");
+                    else if(level <35)
+                        soundicon.icon= QIcon("audio-volume-low");
+                    else if(level<69)
+                        soundicon.icon= QIcon("audio-volume-medium");
+                    else if (level<=100)
+                        soundicon.icon= QIcon("audio-volume-high");
+                }
+            }
+        }
+
+        Item {
             id:iconcontainer
-            width: volumeChanger.height
-            height: volumeChanger.height
+            width: volumeChanger.width / 2
+            height: volumeChanger.width / 2
             PlasmaWidgets.IconWidget {
                 id:soundicon
                 icon:QIcon("audio-volume-medium")
@@ -88,15 +138,12 @@ Rectangle {
                 }
             }
         }
-        Column {
-            anchors {
-                left:iconcontainer.right
-                leftMargin: 20
-            }
+        /*
             Item {
                 id:textcontainer
                 width: volumeline
                 height: volumeChanger.height/2
+
                 Text {
                     text:"SES AYARI"
                     font.family:textFont
@@ -105,59 +152,9 @@ Rectangle {
                     font.pointSize: 8
                     anchors.verticalCenter: parent.verticalCenter
                 }
-            }
-            Item {
-                id:volumeslidercontainer
-                width: volumeline
-                height: volumeChanger.height/2
-                Rectangle {
-                    anchors.fill:parent
-                    color:"transparent"
-                    Rectangle {
-                        height: 1
-                        color:"#969699"
-                        anchors {
-                            left:parent.left
-                            right:parent.right
-                            verticalCenter: parent.verticalCenter
-                        }
-                    }
-                }
-                PlasmaWidgets.Slider {
-                    id: volumeSlider
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        verticalCenter:parent.verticalCenter
-                    }
-                    orientation: Qt.Horizontal
-                    maximum: 100
-                    minimum: 0
-                    value: level
-                    height: 10
-                    onValueChanged: {
-                        if(controller) {
-                            if(volumeChangedByEngine) {
-                                volumeChangedByEngine = false;
-                            } else {
-                                volumeChangedBySlider = true;
-                                level = volumeSlider.value;
-                                previousVol = level;
-                                changeVolume.restart();
-                            }
-                        }
-                        if(level == 0)
-                            soundicon.icon= QIcon("audio-volume-muted");
-                        else if(level <35)
-                            soundicon.icon= QIcon("audio-volume-low");
-                        else if(level<69)
-                            soundicon.icon= QIcon("audio-volume-medium");
-                        else if (level<=100)
-                            soundicon.icon= QIcon("audio-volume-high");
-                    }
-                }
-            }
-        }
+                */
+
+
     }
     /**
      * Timer to change volume, to only trigger a single request on the datasource

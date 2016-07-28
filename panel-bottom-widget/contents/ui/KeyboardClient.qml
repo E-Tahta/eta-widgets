@@ -26,47 +26,28 @@ import org.kde.plasma.graphicswidgets 0.1 as PlasmaWidgets
 
 /**
  * This qml component works as declerative plasma widget and basically triggers
- * the etak application through QDBUS bridge(Interactive White Board Virtual Keyboard).
+ * the virtual keyboard application through QDBUS bridge(Interactive White Board
+ * Virtual Keyboard).
  */
 Rectangle {
-    id:keyboardclient
-    color:"#ffffff"
+    id:keyboardclient    
     Item {
         id:iconContainer
-        height:parent.height
+        height: parent.height * 3 / 4 + lineAlign / 2
+        width: parent.height * 3 / 4 + lineAlign / 2
+        anchors {
+            centerIn: parent
+        }
         PlasmaWidgets.IconWidget {
             id:keyboardIcon
-            icon: QIcon("preferences-desktop-keyboard")
-            preferredIconSize: "48x48"
-            minimumIconSize: "32x32"
+            icon: QIcon("preferences-desktop-keyboard")            
             drawBackground: false
-            anchors {
-                left:parent.left
-                leftMargin: keyboardclient.width*9/100
-            }
-            onClicked: { plasmoid.runCommand("qdbus",["org.eta.virtualkeyboard","/VirtualKeyboard","org.eta.virtualkeyboard.toggle"]); }
-        }
-    }
-    Item {
-        id:textContainer
-        height:parent.height
-        width: parent.width - iconContainer.width
-        Text {
-            id:keyboardText
-            text:"KLAVYE"
-            color: "#969699"
-            font.bold : true
-            font.pointSize: 8.5
-
-            anchors {
-                left:parent.left
-                leftMargin: root.width*9/100 + keyboardIcon.width //+ root.width*7/100
-                verticalCenter:parent.verticalCenter
-            }
-            MouseArea {
-                anchors.fill:parent
-                onClicked: { plasmoid.runCommand("qdbus",["org.eta.virtualkeyboard","/VirtualKeyboard","org.eta.virtualkeyboard.toggle"]);}
+            anchors.fill: parent
+            onClicked: {
+                plasmoid.runCommand("qdbus",["org.eta.virtualkeyboard",
+                                             "/VirtualKeyboard",
+                                             "org.eta.virtualkeyboard.toggle"]);
             }
         }
-    }
+    }    
 }
