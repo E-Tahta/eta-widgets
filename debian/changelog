@@ -1,3 +1,10 @@
+eta-widgets (0.2.14-1) unstable; urgency=medium
+
+  * local package
+  * [7c44cbe] Change panel-bottom widget interface
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Thu, 28 Jul 2016 16:31:38 +0300
+
 eta-widgets (0.2.13-1) unstable; urgency=medium
 
   * local package
