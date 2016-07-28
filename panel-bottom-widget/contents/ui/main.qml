@@ -45,9 +45,10 @@ Item {
      * Indicates that the minimum height of the widget regarding the screen
      * resolution.
      */
-    property int minimumHeight : keyboardclient.height +
+    property int minimumHeight : //keyboardclient.height +
                                  volumeChanger.height +
-                                 printscreen.height +
+                                 //keyboardclient.height +
+                                 //printscreen.height +
                                  bottomseperator.height +
                                  closer.height
 
@@ -69,183 +70,111 @@ Item {
      */
     property int textAlign: minimumWidth*4/100
 
-    Column {        
+    Column {
         anchors.fill:parent
 
-        Row{
-
-        KeyboardClient{
-            id:keyboardclient
-            height: minimumWidth *19/100
-            color:"#ffffff"
-            width: minimumWidth/2
-            visible: true
-        }
-        EtaGestemas {
-            id:etagestemas
-            height: minimumWidth *19/100
-            color:"#ffffff"
-            width: minimumWidth/2
-            visible: true
-            anchors.left: keyboardclient.right
-        }
-}
-
+        Row {
             VolumeChanger {
                 id:volumeChanger
-                volumeline: minimumWidth *44 /100
-                height: minimumWidth *14/100
+                width:  minimumWidth / 4
+                height: minimumWidth * 57 /100
+                volumeline: minimumWidth * 38 /100
                 color:"#ffffff"
-                width: minimumWidth
                 visible: true
-                Item {
-                    id:toolbuttonsoundsettingscontainer
-                    width: minimumWidth *13/100
-                    height: minimumWidth *13/100
-                    anchors {
-                        right: parent.right
-                        rightMargin: lineAlign
-                        verticalCenter: parent.verticalCenter
-                    }
-                    PlasmaWidgets.IconWidget {
-                        id: soundsettingsIcon
-                        icon: QIcon("unity-tweak-tool")
-                        anchors.fill:parent
-                        onClicked: {
-                            plasmoid.runCommand("qdbus",
-                            ["org.kde.kmix",
-                             "/kmix/KMixWindow",
-                             "org.qtproject.Qt.QWidget.show"]);
-                        }
-                    }
-                }
             }
 
-
-        Row {
-            Rectangle {
-                id:printscreen
-                width: minimumWidth/2
-                height: minimumWidth *19/100
-
-                color: "#ffffff"
-
+            Column {
+                id: toolsContainer
                 Row {
-                    anchors {
-                        top:parent.top
-                        topMargin:0
-                        fill:parent
+                    KeyboardClient {
+                        id:keyboardclient
+                        height: volumeChanger.height / 2
+                        color:"#ffffff"
+                        width: minimumWidth * 3 / 8
+                        visible: true
                     }
 
-                    Item {
-                        id:toolbuttonprintscreencontainer
-                        width: minimumWidth *13/100
-                        height: minimumWidth *13/100
-                        anchors {
-                            left:  parent.left
-                            leftMargin: lineAlign -10
-                            verticalCenter: parent.verticalCenter
-                        }
-                        PlasmaWidgets.IconWidget {
-                            id: printscreenIcon
-                            icon: QIcon("ekran_goruntusu")
-                            anchors.fill:parent
-                        }
-                    }//item toolbuttonappcontainer
-                    Item {
-                        anchors {
-                            left:toolbuttonprintscreencontainer.right
-                            leftMargin :lineAlign -8
-                            verticalCenter: parent.verticalCenter
-                        }
-                        Text {
-                            id:printscreentext
-                            text: "EKRAN\nGÖRÜNTÜSÜ"
-                            color: "#969699"
-                            font.family:textFont
-                            font.bold : true
-                            elide: Text.ElideLeft
-                            horizontalAlignment: Text.AlignLeft
+                    Rectangle {
+                        id:penclient
+                        height: volumeChanger.height / 2
+                        width: minimumWidth * 3 / 8
+                        color:"#ffffff"
+
+                        Item {
+                            id:toolbuttonpenclientcontainer
+                            height: penclient.height * 3 / 4
+                            width: penclient.height * 3 / 4
                             anchors {
-                                left: parent.left
-                                leftMargin: 0
-                                verticalCenter: parent.verticalCenter
-                                verticalCenterOffset: 0
+                                centerIn: parent
                             }
-                        }//label
-                    }//item labelcontainer
-                }//Row
-                MouseArea{
-                    anchors.fill: parent
-
-                    onPressAndHold: { printscreentext.color= "#FF6C00"; }
-                    onPressed: {printscreentext.color= "#FF6C00"; }
-                    onReleased: {plasmoid.runCommand("ksnapshot"); printscreentext.color= "#969699";}
+                            PlasmaWidgets.IconWidget {
+                                id: printscreenIcon
+                                icon: QIcon("zim")
+                                anchors.fill:parent
+                                onClicked: {
+                                    plasmoid.runCommand("/usr/bin/eta-pen");
+                                }
+                            }
+                        }//item toolbuttoncontainer
+                    }
                 }
-            } //printscreen rectangle
 
-          Rectangle {
-              id:ekrankarart
-              width: minimumWidth/2
-              height: minimumWidth *19/100
-              color: "#ffffff"
-              z:-1
-              Row {
-                  anchors {
-                      top:parent.top
-                      topMargin:0
-                      fill:parent
-                  }
-                  Item {
-                      id:toolbuttonekrankarartcontainer
-                      width: minimumWidth *13/100
-                      height: minimumWidth *13/100
-                      anchors {
-                          left:  parent.left
-                          leftMargin: lineAlign
-                          verticalCenter: parent.verticalCenter
-                      }
-                      PlasmaWidgets.IconWidget {
-                          id: ekrankarartIcon
-                          icon: QIcon("perde")
-                          anchors.fill:parent
-                      }
-                  }//item toolbuttonappcontainer
-                  Item {
-                      anchors {
-                          left:toolbuttonekrankarartcontainer.right
-                          leftMargin :lineAlign -8
-                          verticalCenter: parent.verticalCenter
-                      }
-                      Text {
-                          id:ekrankararttext
-                          text: "EKRANI\nKARART"
-                          color: "#969699"
-                          font.family:textFont
-                          font.bold : true
-                          elide: Text.ElideLeft
-                          horizontalAlignment: Text.AlignLeft
-                          anchors {
-                              left: parent.left
-                              leftMargin: 0
-                              verticalCenter: parent.verticalCenter
-                              verticalCenterOffset: 0
-                          }
-                      }//label
-                  }//item labelcontainer
-                  MouseArea {
-                      anchors.fill: parent
 
-                      onPressAndHold: { ekrankararttext.color= "#FF6C00"; }
-                      onPressed: { ekrankararttext.color= "#FF6C00"; }
-                      onReleased:{
-                          plasmoid.runCommand("/usr/bin/screenblackoutcpp");
-                          ekrankararttext.color= "#969699";
-                      }
-                  }
-              }//Row
-          }//ekran karart rectangle
-        }//Row of  print screen + ekran karart
+                Row {
+
+
+                    Rectangle {
+                        id:printscreen
+                        height: volumeChanger.height / 2
+                        width: minimumWidth * 3 / 8
+                        color: "#ffffff"
+
+                        Item {
+                            id:toolbuttonprintscreencontainer
+                            height: printscreen.height * 3 / 4
+                            width: printscreen.height * 3 / 4
+                            anchors {
+                                centerIn: parent
+                            }
+                            PlasmaWidgets.IconWidget {
+                                id: penClientIcon
+                                icon: QIcon("ekran_goruntusu")
+                                anchors.fill:parent
+                                onClicked: {
+                                    plasmoid.runCommand("ksnapshot");
+                                }
+                            }
+                        }
+                    } //printscreen rectangle
+
+                    Rectangle {
+                        id:screenblackout
+                        height: volumeChanger.height / 2
+                        width: minimumWidth * 3 / 8
+                        color: "#ffffff"
+
+                        Item {
+                            id:toolbuttonscreenblackoutcontainer
+                            height: screenblackout.height * 3 / 4 - lineAlign/3
+                            width: screenblackout.height * 3 / 4
+                            anchors {
+                                centerIn: parent
+                            }
+                            PlasmaWidgets.IconWidget {
+                                id: ekrankarartIcon
+                                icon: QIcon("perde")
+                                anchors.fill:parent
+                                onClicked: {
+                                    plasmoid.runCommand(
+                                                "/usr/bin/screenblackoutcpp");
+                                }
+                            }
+                        }//item toolbuttonappcontainer
+                    }//ekran karart rectangle
+                }
+            }
+        }
+
         Rectangle {
             id:bottomseperator
             color: "#ffffff"
@@ -264,6 +193,7 @@ Item {
                 }
             }//Rectangle line
         }// Rectangle middleline container
+
         Row {
             Rectangle {
                 id:helper
@@ -375,12 +305,13 @@ Item {
                 }
             }// closer rectangle
         }//Row of helper + closer
+
     }//main column
 
     Help {
         id:helpRect
         width: minimumWidth
-        height: volumeChanger.height+printscreen.height
+        height: volumeChanger.height
         x:root.x
         y:root.y+height
         z:-1
@@ -390,11 +321,22 @@ Item {
     states: [
         State {
             name: 'visible'
-            PropertyChanges { target: helpRect; x: root.x; y: root.y; z:100; opacity:1; }
+            PropertyChanges {
+                target: helpRect;
+                x: root.x;
+                y: root.y;
+                z:100;
+                opacity:1;
+            }
         },
         State {
             name: 'invisible'
-            PropertyChanges { target: helpRect; x: root.x ; y: root.y+ helpRect.height; z:-1; opacity:0; }
+            PropertyChanges { target: helpRect;
+                x: root.x ;
+                y: root.y+ helpRect.height;
+                z:-1;
+                opacity:0;
+            }
         }
     ]
     transitions: [
@@ -424,4 +366,4 @@ Item {
         textFont = plasmoid.readConfig( "textFont" )
     }
 }//Item root
-  
+

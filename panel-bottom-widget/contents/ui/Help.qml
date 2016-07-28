@@ -28,16 +28,21 @@ import QtQuick 1.1
 Rectangle {
     id:pop
     color:"#34353a"
+    property string pressedTextColor : "#FF6C00"
+    property string circleColors : "FFFFFF"
+    property string circleHeight : lineAlign * 2 / 3
+    property int fontPointSize : 12
     Column {
         Item {
+            id:userManuel
             height: pop.height/2
             width: minimumWidth
             Rectangle {
                 id:circle1
-                height: lineAlign/2
-                width: lineAlign/2
-                color: "#ffffff"
-                radius: lineAlign/4
+                height: circleHeight
+                width: circle1.height
+                color: circleColors
+                radius: circle1.height / 2
                 anchors {
                     left:parent.left
                     leftMargin:lineAlign
@@ -48,6 +53,7 @@ Rectangle {
                 id: guideline
                 text: "KULLANIM KLAVUZU"
                 font.bold: true
+                font.pointSize: fontPointSize
                 verticalAlignment: Text.AlignVCenter
                 color: "#ffffff"
                 anchors {
@@ -58,8 +64,8 @@ Rectangle {
             }
             MouseArea{
                 anchors.fill: parent
-                onPressAndHold: { guideline.color= "#FF6C00"; }
-                onPressed: {guideline.color= "#FF6C00"; }
+                onPressAndHold: { guideline.color = pressedTextColor; }
+                onPressed: {guideline.color = pressedTextColor; }
                 onReleased: {
                     //plasmoid.runCommand("konsole");
                     guideline.color= "#ffffff";
@@ -73,10 +79,10 @@ Rectangle {
             width: minimumWidth
             Rectangle {
                 id:circle2
-                height: lineAlign/2
-                width: lineAlign/2
-                color: "#ffffff"
-                radius: lineAlign/4
+                height: circleHeight
+                width: circle2.height
+                color: circleColors
+                radius: circle2.height
                 anchors {
                     left:parent.left
                     leftMargin:lineAlign
@@ -87,6 +93,7 @@ Rectangle {
                 id: helpmsg
                 text: "YARDIM MESAJI"
                 font.bold: true
+                font.pointSize: fontPointSize
                 verticalAlignment: Text.AlignVCenter
                 color: "#ffffff"
                 anchors {
@@ -97,8 +104,8 @@ Rectangle {
             }
             MouseArea {
                 anchors.fill: parent
-                onPressAndHold: { helpmsg.color= "#FF6C00"; }
-                onPressed: {helpmsg.color= "#FF6C00"; }
+                onPressAndHold: { helpmsg.color= pressedTextColor; }
+                onPressed: {helpmsg.color= pressedTextColor; }
                 onReleased: {
                     plasmoid.runCommand("/usr/bin/etahelp");
                     helpmsg.color= "#ffffff";
@@ -110,10 +117,10 @@ Rectangle {
     }
     Rectangle {
         id:verticalLine
-        color:"#ffffff"
+        color:circleColors
         width:1
         x: circle1.x+circle1.radius-width
         y: circle1.y+circle1.radius
-        height: pop.height -(pop.y-circle1.y) - closer.height
+        height: pop.height - circle1.y - circle1.height / 2
     }
 }
