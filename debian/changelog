@@ -1,3 +1,10 @@
+eta-widgets (0.2.15-1) unstable; urgency=medium
+
+  * local package
+  * [98350e5] Change some icons
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Thu, 28 Jul 2016 17:52:37 +0300
+
 eta-widgets (0.2.14-1) unstable; urgency=medium
 
   * local package
