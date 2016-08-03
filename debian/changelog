@@ -1,3 +1,10 @@
+eta-widgets (0.2.16-1) unstable; urgency=medium
+
+  * local package
+  * [67e023a] Change screenblackout application binary name
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Wed, 03 Aug 2016 10:40:03 +0300
+
 eta-widgets (0.2.15-1) unstable; urgency=medium
 
   * local package
