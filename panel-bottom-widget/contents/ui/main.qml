@@ -164,7 +164,8 @@ Item {
                                 icon: QIcon("perde")
                                 anchors.fill:parent
                                 onClicked: {
-                                    plasmoid.runCommand("/usr/bin/eta-black");
+                                    plasmoid.runCommand("/usr/bin/eta-black",
+                                                        ["&"]);
                                 }
                             }
                         }//item toolbuttonappcontainer
