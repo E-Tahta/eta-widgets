@@ -45,8 +45,7 @@ Item {
      * Indicates that the minimum height of the widget regarding the screen
      * resolution.
      */
-    property int minimumHeight : //keyboardclient.height +
-                                 volumeChanger.height +
+    property int minimumHeight : volumeChanger.height +
                                  //keyboardclient.height +
                                  //printscreen.height +
                                  bottomseperator.height +
@@ -165,8 +164,7 @@ Item {
                                 icon: QIcon("perde")
                                 anchors.fill:parent
                                 onClicked: {
-                                    plasmoid.runCommand(
-                                                "/usr/bin/screenblackoutcpp");
+                                    plasmoid.runCommand("/usr/bin/eta-black");
                                 }
                             }
                         }//item toolbuttonappcontainer
@@ -299,7 +297,9 @@ Item {
                     onPressAndHold: {kapattext.color= "#FF6C00"; }
                     onPressed: {kapattext.color= "#FF6C00"; }
                     onReleased: {
-                        plasmoid.runCommand("qdbus", ["org.kde.ksmserver", "/KSMServer", "org.kde.KSMServerInterface.logout", "1", "-1", "-1"]);
+                        plasmoid.runCommand("qdbus", ["org.kde.ksmserver",
+                            "/KSMServer", "org.kde.KSMServerInterface.logout",
+                            "1", "-1", "-1"]);
                         kapattext.color= "#969699";
                     }
                 }
