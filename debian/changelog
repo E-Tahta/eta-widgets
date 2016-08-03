@@ -1,3 +1,10 @@
+eta-widgets (0.2.17-1) unstable; urgency=medium
+
+  * local package
+  * [5352c84] Fix the command in order to call eta-black
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Wed, 03 Aug 2016 11:32:53 +0300
+
 eta-widgets (0.2.16-1) unstable; urgency=medium
 
   * local package
