@@ -1,3 +1,10 @@
+eta-widgets (0.2.18-1) unstable; urgency=medium
+
+  * local package
+  * [65d70b8] Add User Manual kicker on pabel bottom widget
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Tue, 16 Aug 2016 16:34:15 +0300
+
 eta-widgets (0.2.17-1) unstable; urgency=medium
 
   * local package
