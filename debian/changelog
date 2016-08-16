@@ -1,3 +1,10 @@
+eta-widgets (0.2.18-2) unstable; urgency=medium
+
+  * local package
+  * [ce47ee8] Update gbp.conf
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Tue, 16 Aug 2016 17:03:16 +0300
+
 eta-widgets (0.2.18-1) unstable; urgency=medium
 
   * local package
