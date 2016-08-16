@@ -51,7 +51,7 @@ Rectangle {
             }
             Text {
                 id: guideline
-                text: "KULLANIM KLAVUZU"
+                text: "KULLANIM KILAVUZU"
                 font.bold: true
                 font.pointSize: fontPointSize
                 verticalAlignment: Text.AlignVCenter
@@ -67,7 +67,8 @@ Rectangle {
                 onPressAndHold: { guideline.color = pressedTextColor; }
                 onPressed: {guideline.color = pressedTextColor; }
                 onReleased: {
-                    //plasmoid.runCommand("konsole");
+                    plasmoid.runCommand("okular",
+                    ["/usr/share/eta/eta-help/Kullanım\ Kılavuzu.pdf"]);
                     guideline.color= "#ffffff";
                     root.state = 'invisible';
                     helper.color= "#ffffff";
