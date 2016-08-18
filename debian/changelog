@@ -1,9 +1,10 @@
-eta-widgets (0.2.18-2) unstable; urgency=medium
+eta-widgets (0.2.18-3) unstable; urgency=medium
 
   * local package
+  * [613399d] Add eta-pen dependency on control file
   * [ce47ee8] Update gbp.conf
 
- -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Thu, 18 Aug 2016 10:33:12 +0300
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Thu, 18 Aug 2016 10:36:08 +0300
 
 eta-widgets (0.2.18-1) unstable; urgency=medium
 
