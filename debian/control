@@ -9,7 +9,7 @@ Homepage: https://pardus.org.tr
 
 Package: eta-widgets
 Architecture: amd64
-Depends:  ${shlibs:Depends}, ${misc:Depends}, plasma-desktop (>= 4:4.11.13-2), eta-pen (>= 0.1.0)
+Depends:  ${shlibs:Depends}, ${misc:Depends}, plasma-desktop (>= 4:4.11.13-2), eta-pen (>= 0.1.0), eta-ebalogin (>= 0.1.0)
 Description: Etkileşimli Tahta Arayüzü ' ne özel geliştirilmiş Plasmoidler.
  EtaPanel üzerinde duran ve ETA kullanıcısına çeşitli kullanış kolaylıkları
  sağlayan qml ve cpp ile geliştirilmiş plasma4 gereçleri.

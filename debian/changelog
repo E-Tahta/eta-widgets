@@ -1,3 +1,10 @@
+eta-widgets (0.2.19-1) unstable; urgency=medium
+
+  * local package
+  * [7b684aa] Change eba widgets backend command
+
+ -- Yunusemre Şentürk <yunusemre@pardus.org.tr>  Fri, 14 Oct 2016 19:09:26 +0300
+
 eta-widgets (0.2.18-3) unstable; urgency=medium
 
   * local package
