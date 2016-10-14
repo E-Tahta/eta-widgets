@@ -423,8 +423,7 @@ Item {
                     */
                     widgetrepresenter.state = 'invisible';
                     ebatext.color= "#969699";
-                    plasmoid.runCommand("firefox",["-new-window",
-                                                   "http://eba.gov.tr"]);
+                    plasmoid.runCommand("/usr/bin/ebalogin");
                 }
             }
         }
