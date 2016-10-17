@@ -1,3 +1,10 @@
+eta-widgets (0.2.19-2) unstable; urgency=medium
+
+  * local package
+  * [00a6c43] Update dependency on eta-ebalogin
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Mon, 17 Oct 2016 12:16:33 +0300
+
 eta-widgets (0.2.19-1) unstable; urgency=medium
 
   * local package
