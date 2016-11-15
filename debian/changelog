@@ -1,3 +1,10 @@
+eta-widgets (0.2.19-3) unstable; urgency=medium
+
+  * local package
+  * [45fdb02] Enhance package dependency
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Tue, 15 Nov 2016 14:14:39 +0300
+
 eta-widgets (0.2.19-2) unstable; urgency=medium
 
   * local package
