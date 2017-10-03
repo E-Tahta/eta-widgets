@@ -68,7 +68,7 @@ Rectangle {
                 onPressed: {guideline.color = pressedTextColor; }
                 onReleased: {
                     plasmoid.runCommand("okular",
-                    ["/usr/share/eta/eta-help/Kullanım\ Kılavuzu.pdf"]);
+                    ["/usr/share/eta/eta-help/user_guide.pdf"]);
                     guideline.color= "#ffffff";
                     root.state = 'invisible';
                     helper.color= "#ffffff";
@@ -108,7 +108,7 @@ Rectangle {
                 onPressAndHold: { helpmsg.color= pressedTextColor; }
                 onPressed: {helpmsg.color= pressedTextColor; }
                 onReleased: {
-                    plasmoid.runCommand("/usr/bin/etahelp");
+                    plasmoid.runCommand("/usr/bin/eta-help");
                     helpmsg.color= "#ffffff";
                     root.state = 'invisible';
                     helper.color= "#ffffff";
