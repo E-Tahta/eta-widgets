@@ -9,7 +9,7 @@ Homepage: http://pardus.org.tr
 Package: eta-widgets
 Architecture: amd64
 Pre-Depends: kde-window-manager, plasma-desktop
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, eta-engine, eta-black, eta-help, eta-peach, eta-pen
 Description: ETAP için geliştirilmiş Plasmoidler.
  EtaPanel üzerinde duran ve ETA kullanıcısına çeşitli
  kullanış kolaylıkları sağlayan qml ve cpp ile
