@@ -1,3 +1,10 @@
+eta-widgets (0.3.2) unstable; urgency=medium
+
+  * Update eta-help binary name and user guide pdf
+  * Add dependencies to binary package
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Tue, 03 Oct 2017 15:19:23 +0300
+
 eta-widgets (0.3.1) unstable; urgency=medium
 
   * Update desktop files and add icons
