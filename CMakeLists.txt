@@ -6,6 +6,9 @@ include(KDE4Defaults)
 
 add_subdirectory(peach-hwidget)
  
+install(DIRECTORY icons/
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/share/eta/eta-widgets/icons)
+
 install(DIRECTORY panel-bottom-widget/ 
         DESTINATION ${CMAKE_INSTALL_PREFIX}/share/kde4/apps/plasma/plasmoids/panelbottomwidget)
  

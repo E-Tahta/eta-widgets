@@ -1,7 +1,8 @@
 [Desktop Entry]
 Name=paneltopwidget
 Comment=Gets user name and surname and shows date and time, and also can open up some specific applications
-Icon=colors
+Comment[tr]=Tüm uygulamaları, Kullanıcı Ad Soyad ve Saati içerir
+Icon=/usr/share/eta/eta-widgets/icons/top.svg
 
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/main.qml
@@ -20,3 +21,6 @@ X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/PopupApplet
 Type=Service
+
+GenericName=Panel Top Widget
+GenericName[tr]=Panel Üst Gereci

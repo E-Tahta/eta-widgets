@@ -1,7 +1,8 @@
 [Desktop Entry]
 Name=paneltopquickwidget
 Comment=Shows the quick application bar according to paneltopwidget
-Icon=applications-system
+Comment[tr]=Panel Üst Gerecine uygun bir şekilde kısayolları içerir
+Icon=/usr/share/eta/eta-widgets/icons/topquick.svg
 
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/main.qml
@@ -20,3 +21,6 @@ X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/PopupApplet
 Type=Service
+
+GenericName=Panel Top Quick Widget
+GenericName[tr]=Panel Üst Kısayol Gereci

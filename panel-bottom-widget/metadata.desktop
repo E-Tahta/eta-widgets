@@ -1,7 +1,8 @@
 [Desktop Entry]
 Name=panelbottomwidget
-Comment=Includes Settings , Screen blackout, Screen Capture and Close
-Icon=applications-system
+Comment=Includes Settings, Screen blackout, Screen Capture and Close
+Comment[tr]=Ayarları, Ekran karartmayı, Ekran görüntüsü ve Kapat ı içerir
+Icon=/usr/share/eta/eta-widgets/icons/bottom.svg
 
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/main.qml
@@ -21,3 +22,5 @@ X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/PopupApplet
 Type=Service
+GenericName=Panel Bottom Widget
+GenericName[tr]=Panel Alt Gereci
