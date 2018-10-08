@@ -1,3 +1,11 @@
+eta-widgets (1.0) unstable; urgency=medium
+
+  * Bump package version to 1.0
+  * Remove sources and make it virtual package
+  * Pardus CI integration
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Mon, 08 Oct 2018 09:14:03 +0300
+
 eta-widgets (0.3.3) unstable; urgency=medium
 
   * Fix missing build dependencies
