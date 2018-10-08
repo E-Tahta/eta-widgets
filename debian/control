@@ -1,16 +1,21 @@
 Source: eta-widgets
-Section: kde
+Section: metapackages
 Priority: optional
 Maintainer: Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>
-Build-Depends: debhelper (>= 9), kdebase-workspace-dev, cmake, libxtst-dev
+Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.6
-Homepage: http://pardus.org.tr
+Homepage: http://etap.org.tr
 
 Package: eta-widgets
 Architecture: amd64
-Pre-Depends: kde-window-manager, plasma-desktop
-Depends: ${shlibs:Depends}, ${misc:Depends}, eta-engine, eta-black, eta-help, eta-peach, eta-pen
+Depends: ${misc:Depends}, 
+ eta-peach,
+ eta-widget-appsmenu,
+ eta-widget-audioandtools,
+ eta-widget-infoandnetwork,
+ eta-widget-peachbutton,
+ eta-widget-quickappsandusb
 Description: ETAP için geliştirilmiş Plasmoidler.
  EtaPanel üzerinde duran ve ETA kullanıcısına çeşitli
  kullanış kolaylıkları sağlayan qml ve cpp ile
- geliştirilmiş plasma4 gereçleri.
+ geliştirilmiş plasma4 gereçlerini içeren meta-package.
