@@ -14,7 +14,8 @@ Depends: ${misc:Depends},
  eta-widget-audioandtools,
  eta-widget-infoandnetwork,
  eta-widget-peachbutton,
- eta-widget-quickappsandusb
+ eta-widget-quickappsandusb,
+ eta-widget-slack
 Description: ETAP için geliştirilmiş Plasmoidler.
  EtaPanel üzerinde duran ve ETA kullanıcısına çeşitli
  kullanış kolaylıkları sağlayan qml ve cpp ile
